@@ -2,18 +2,19 @@ Subject: Pylunch Nova (Python tutorial/knowledge sharing sessions), starting May
 
 Hello all,
 
-Some of you may recall the survey we sent you a few weeks ago about learning/improving skills with Python.  We received 95 responses expressing interest in this idea so we have decided to go forward with this.  Hence, here we're letting you all know about our tentative plan for "Pylunch Nova"*. To sum up, it is <short description that makes it clear this is aimed at helping *scistaff* learn but still being inclusive for those that want to trade knowledge.>
+Some of you may recall the survey we sent a month or so back about learning/improving skills with Python.  We received 95 responses expressing interest in this idea so we have decided to go forward with this.  So here we're inviting all who are interested to join the first meeting of "Pylunch Nova"*. 
 
-The first session will be Thursday, May 17, 1-2pm in LOCATION.  We will plan to hold sessions at 1pm every other Thursday. We have mapped out a tentative schedule which you can examine in more detail [here](https://github.com/spacetelescope/pylunch/blob/master/roadmap.md).  The first two sessions will be introductory sessions about Python and the Astronomy ecosystem in Python.  While this might be basic for some starting with more Python background, we encourage you to come regardless, as a large goal of these sessions is knowledge *sharing* between everyone, not just the organizers presenting materials.
+To sum up, the intent of Pylunch Nova is to create a peer learning environment where all can learn how to use Python effectively for our science.  So the material will probably be of most relevance to science staff/postdocs, but any who are doing research will likely get something out of it.  The general format will be for the day's leaders (initially the two of us) to present some introductory material, and then most of the session will be spent on having the participants actually work on tutorials and the like, and be able to ask questions of the leaders or anyone else in the room.  So be sure to bring your laptops!
+
+The first session will be Thursday, May 17, 1-2pm in the Boardroom (4th floor of Muller).  We will plan to hold sessions at 1pm every other Thursday. We have mapped out a tentative schedule which you can examine in more detail [here](https://github.com/spacetelescope/pylunch/blob/master/roadmap.md).  The first two sessions will be introductory sessions about Python and the Astronomy ecosystem in Python.  While this might be basic for some starting with more Python background, we encourage you to come regardless, as a large goal of these sessions is knowledge *sharing* between everyone, not just the organizers presenting materials.
 
 Our tentative plan also includes a "Hack Hour" every third session.  This will be an open day with no formal content, but all interested can join simply come for the session to work on Python-related tasks you might have with other Python expertise in the room.
 
-<details about the mailing list>
+We will also have a mailing list for this group - the pre-exiting "pylunch" mailing list seems great for this purpose, so you can add yourself to that (it's one of the Exchange groups), or if you're not sure how to do that, just [fill out this form](https://docs.google.com/forms/d/151jzHUAx3hbUy1Cy4kboh8KRFfY04L1noFjDaKO9gNU), and we'll get you added.
 
 We hope this will provide a great venue for STScI scientists to gain Python skills in a collegial and low-time-committment environment, and hope to see many of you there!
 
 
 Erik Tollerud and Ivelina Momcheva
-
 
 * This is both a "new" version of the pylunch group, and Pylunch is a recurring astronomical phenomenon.
