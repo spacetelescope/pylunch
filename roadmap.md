@@ -1,8 +1,9 @@
-Every other Tuesday @ noon, Starting May 17
+Every other Tuesday @ 1pm, Starting May 17 (tentatively in the boardroom)
 
-Every third session is a “Hack hour” (2 hrs)
+Every third session is a “Hack hour” (might be 2 hrs, depending on what room we can get)
 
-Initial schedule
+Tentative schedule
+==================
 
 May 17: Introduction/Getting everyone on the same page
 * Anaconda
