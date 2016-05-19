@@ -33,4 +33,5 @@ Additional Topic Ideas
 * Astropy coordinates
 * Astropy fits
 * git
+* Python 2 vs Python 3 differences (+ tips for converting from 2 to 3)
 
