@@ -24,10 +24,13 @@ Jun 28 (Erik absent)
 
 Jul 12:
 * Matplotlib
+
 Jul 26 (Erik absent, maybe Iva absent)
-* TBD guest lecture
+* TBD guest leader
+
 Aug 9 (Erik absent)
 * Hack Hour
+
 Aug 23
 * Cython
 
