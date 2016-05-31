@@ -639,7 +639,7 @@ from astropy.coordintes import SkyCoord</p>
 import astropy.coordinates <br>
 from astropy.coordintes import <span class="circletext">angles</span> <br>
 from astropy.coordintes import SkyCoord</p>
-<p><code>astropy</code> is a:</p>
+<p><code>angles</code> is a:</p>
 
 </div>
 </div>
@@ -674,7 +674,7 @@ from astropy.coordintes import SkyCoord</p>
 import astropy.coordinates <br>
 from astropy.coordintes import angles <br>
 from astropy.coordintes import <span class="circletext">SkyCoord</span></p>
-<p><code>astropy</code> is a:</p>
+<p><code>SkyCoord</code> is a:</p>
 
 </div>
 </div>
@@ -684,7 +684,8 @@ from astropy.coordintes import <span class="circletext">SkyCoord</span></p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="variable-(more-specifically,-a-class)">variable (more specifically, a class)<a class="anchor-link" href="#variable-(more-specifically,-a-class)">&#182;</a></h2>
+<h2 id="variable-(more-specifically,-a-class)">variable (more specifically, a class)<a class="anchor-link" href="#variable-(more-specifically,-a-class)">&#182;</a></h2><p>(This was a bit of a trick question: imports like this can import things from <em>inside</em> modules just as easily as modules themselves.  You don't necessarily know that what you're getting is a module without knowing what's actually in the package.)</p>
+
 </div>
 </div>
 </div></div><div class="fragment">
@@ -696,6 +697,43 @@ from astropy.coordintes import <span class="circletext">SkyCoord</span></p>
 <p>Which you would use from python as</p>
 
 <pre><code>coord = SkyCoord(3, 4, unit='degrees')</code></pre>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One more special but common case to consider:</p>
+<p>from astropy import units as <span class="circletext">u</span> <br></p>
+<p><code>u</code> is a:</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="module">module<a class="anchor-link" href="#module">&#182;</a></h2><p>Actually, you use <code>u</code> here just the same as how you'd use <code>units</code> if you'd done <code>from astropy import units</code>.  The <code>as</code> part is just a way to set a local "alias" for quick-and-easy use.</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And in fact these two yield the exact same as <code>from astropy import units as u</code>:</p>
+
+<pre><code>import astropy.units as u</code></pre>
+
+<pre><code>from astropy import units
+u = units</code></pre>
 
 </div>
 </div>

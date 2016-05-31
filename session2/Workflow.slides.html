@@ -268,7 +268,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Python-scripts-(&quot;.py&quot;-files)">Python scripts (".py" files)<a class="anchor-link" href="#Python-scripts-(&quot;.py&quot;-files)">&#182;</a></h1>
+<h1 id="Python-scripts-(&quot;.py&quot;-files)">Python scripts (".py" files)<a class="anchor-link" href="#Python-scripts-(&quot;.py&quot;-files)">&#182;</a></h1><p>Python scripts are one of the simplest ways to run python code - whatever's in the file just gets executed by the python interpreter as-is so it's very straightforward to see what's going on.</p>
+
 </div>
 </div>
 </div></section><section>
@@ -313,7 +314,8 @@ But you can also specify a specific python interpreter in the file itself by add
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Python-and-IPython-interpreters">Python and IPython interpreters<a class="anchor-link" href="#Python-and-IPython-interpreters">&#182;</a></h1>
+<h1 id="Python-and-IPython-interpreters">Python and IPython interpreters<a class="anchor-link" href="#Python-and-IPython-interpreters">&#182;</a></h1><p>A more convenient way to work with Python is through a command line interpreter.  This allows quick interactive work with Python, often useful for quick analysis or one-off activities.</p>
+
 </div>
 </div>
 </div></section><section>
@@ -322,8 +324,7 @@ But you can also specify a specific python interpreter in the file itself by add
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A more convenient way to work with Python is through the command line interpreter. 
-The basic Python command line interpreter can be started by just typing:</p>
+<p>The basic Python command line interpreter can be started by just typing:</p>
 
 <pre><code>python</code></pre>
 <p>This will create a prompt where you can issue python commands just like they were written in a script.  For example, a simple print statement:</p>
@@ -381,20 +382,31 @@ In [2]: a.+tab</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Jupyter-notebooks">Jupyter notebooks<a class="anchor-link" href="#Jupyter-notebooks">&#182;</a></h1><p>A final way of using python is through the Jupyter Notebooks you see here. In your terminal fire up the notebook server:</p>
-
-<pre><code>jupyter notebook</code></pre>
-<p>This will pop up a web page. In the upper right corner click on the "New" tab and select the "Python3" option, which will start a notebook just like this one. Try out the exrcises above. Here you can also define functions, like this:</p>
+<h1 id="Jupyter-notebooks">Jupyter notebooks<a class="anchor-link" href="#Jupyter-notebooks">&#182;</a></h1><p>A final way of using python is through the Jupyter Notebooks (used for this right here!).  Notebooks are convenient for science workflows because they allow full access to Python (or other programming languages) while storing a record of everything you've done, along with notes you might want to leave yourself, as well as multimedia content like plots or animations.</p>
 
 </div>
 </div>
 </div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In your terminal fire up the notebook server:</p>
+
+<pre><code>jupyter notebook</code></pre>
+<p>This will pop up a web page. In the upper right corner click on the "New" tab and select the "Python3" option, which will start a notebook just like this one. Note that to actually make code <em>run</em> in a notebook, you have to use shift-enter (or ctrl-enter).</p>
+<p>So we'll try out the exercises above in the notebook. In the notebook it's easy define functions, as shown below.  (Be sure to hit shift-enter on that cell before trying to use it in the cell below!)</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;James&#39;</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;James&#39;</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello </span><span class="si">{}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 </pre></div>
 
@@ -402,10 +414,64 @@ In [2]: a.+tab</code></pre>
 </div>
 </div>
 
-</div></section><section>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hello</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello James!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hello</span><span class="p">(</span><span class="s1">&#39;Altez&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello Altez!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
