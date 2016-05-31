@@ -93,6 +93,9 @@ def update_pages_branch(remote_to_push_to, pages_branch, dirs):
             if push_errored:
                 print('Pushing {} to {} failed - try manually for more '
                       'info'.format(pages_branch, remote_to_push_to))
+            else:
+                print('Pushed {} to {} without any errors'.format(pages_branch,
+                                                                  remote_to_push_to))
         else:
             print('Not pushing {} to any remote'.format(pages_branch))
     else:
