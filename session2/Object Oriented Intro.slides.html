@@ -512,9 +512,9 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Some-Examples-(For-you-to-try!)">Some Examples (For you to try!)<a class="anchor-link" href="#Some-Examples-(For-you-to-try!)">&#182;</a></h1><p>Go to <a href="https://github.com/spacetelescope/pylunch">https://github.com/spacetelescope/pylunch</a> and clone it (if you know git).</p>
-<p>Or click on: <code>session2</code> -&gt; <code>Object Oriented Intro.ipynb</code> -&gt; "Raw" in the upper right, and copy to your computer.</p>
-<p>Once you've got it locally, cd into that directory and do <code>jupyter notebook</code></p>
+<h1 id="Some-Examples-(For-you-to-try!)">Some Examples (For you to try!)<a class="anchor-link" href="#Some-Examples-(For-you-to-try!)">&#182;</a></h1><p>Go to <a href="https://github.com/spacetelescope/pylunch">https://github.com/spacetelescope/pylunch</a> and clone it (if you know git).  Then just find the <code>Object Oriented Intro.ipynb</code> file.</p>
+<h2 id="Or">Or<a class="anchor-link" href="#Or">&#182;</a></h2><p>click on: <code>session2</code> -&gt; <code>Object Oriented Intro.ipynb</code> -&gt; "Raw" in the upper right.  Then "Save As" (Or "Save Page As..." or whatever your browser's equivalent) and put the file somewhere you can find on your local machine.</p>
+<h2 id="Then">Then<a class="anchor-link" href="#Then">&#182;</a></h2><p>Once you've got it locally, cd into that directory and do <code>jupyter notebook</code></p>
 
 </div>
 </div>
@@ -576,13 +576,14 @@ a.anchor-link {
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
         <span class="c1"># can also be this (works in py 2.x):</span>
-        <span class="n">Point</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="c1">#Point.__init__(self, x, y)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
     
     <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># this method &quot;overrides&quot; the `draw` method of Point</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Circle</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
         <span class="c1"># can also be this (works in py 2.x):</span>
         <span class="c1">#Point.draw(self)</span>
+        <span class="c1"># note for people not familiar with matplotlib: alpha keyword below sets transparency</span>
         <span class="n">circle_patch</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle_patch</span><span class="p">)</span>
         
