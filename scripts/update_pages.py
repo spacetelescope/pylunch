@@ -75,18 +75,28 @@ def update_pages_branch(remote_to_push_to, pages_branch, dirs):
         toadd.append('index.html')
 
     repo.index.add(toadd)
-    repo.index.commit('Automatic commit from update_pages.py')
+    anything_added = repo.git.diff('--cached', '--abbrev=40', '--raw') != ''
+    if anything_added:
+        repo.index.commit('Automatic commit from update_pages.py')
 
-    if remote_to_push_to:
-        for remote in repo.remotes:
-            if remote.name == remote_to_push_to:
-                break
+        if remote_to_push_to:
+            for remote in repo.remotes:
+                if remote.name == remote_to_push_to:
+                    break
+            else:
+                raise ValueError('Found no remote named ' + str(remote_to_push_to))
+
+            pushres = remote.push(pages_branch)
+            push_errored = len(pushres) == 0
+            if not push_errored:
+                push_errored = any([bool(r.flags&r.ERROR) for r in pushres])
+            if push_errored:
+                print('Pushing {} to {} failed - try manually for more '
+                      'info'.format(pages_branch, remote_to_push_to))
         else:
-            raise ValueError('Found no remote named ' + str(remote_to_push_to))
-
-        remote.push(pages_branch)
+            print('Not pushing {} to any remote'.format(pages_branch))
     else:
-        print('Not pushing {} to any remote'.format(pages_branch))
+        print("Nothing to be added, so not committing and not pushing")
 
     repo.head.reference = orig_ref
     repo.head.reset(index=True, working_tree=False)
