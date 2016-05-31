@@ -13,3 +13,8 @@
     padding-right: 4px;
     text-align: center;
 }
+
+.reveal .input pre {
+  font-size: 100%;
+  width: 100%;
+}
