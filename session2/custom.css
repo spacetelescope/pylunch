@@ -19,7 +19,7 @@
   width: 100%;
 }
 
-.rendered_html code {
-  font-size: 200%;
+.rendered_html pre {
+  font-size: 100%;
   line-height : 100%;
 }
