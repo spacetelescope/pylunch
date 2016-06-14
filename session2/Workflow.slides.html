@@ -294,17 +294,29 @@ Open your favorite text editor and create a hello.py file containing the followi
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When you run the file this way you tell it to use the current active Python to run the file. 
-But you can also specify a specific python interpreter in the file itself by adding the following line at the beginning of your file:</p>
+<p>When you run the file this way you tell it to use the current active Python to run the file.</p>
+<p>To make this script run like a command, add the following to the beginning of the file:</p>
 
-<pre><code>#!/Users/&lt;yourname&gt;/anaconda3/bin/python</code></pre>
-<p>Then you can still do:</p>
+<pre><code>#!/usr/bin/env python</code></pre>
+<p>Then, make the script executable using the command:</p>
 
-<pre><code>python hello.py</code></pre>
-<p>But you can also make your file executable and run it alone:</p>
+<pre><code>$ chmod u+x hello.py</code></pre>
+<p>Now you will be able to run the script as:</p>
 
-<pre><code>chmod u+x hello.py
-./hello.py</code></pre>
+<pre><code>$ ./hello.py</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If a script needs to be run by a specific version of python, and not the one normally found when you type <code>python</code> on the command line, you can specify the full path to that python executable:</p>
+
+<pre><code>#!/Users/myusername/anaconda/envs/base-py2/bin/python</code></pre>
+<p>To learn more about this Unix magic, lookup <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a></p>
 
 </div>
 </div>

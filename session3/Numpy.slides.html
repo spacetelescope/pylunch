@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>Object Oriented Intro slides</title>
+<title>Numpy slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -252,7 +252,24 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="What-is-Object-Oriented-Programming?">What is Object-Oriented Programming?<a class="anchor-link" href="#What-is-Object-Oriented-Programming?">&#182;</a></h1>
+<p>These lecture notebooks are here:</p>
+<p><a href="https://github.com/spacetelescope/pylunch/tree/master/session3">https://github.com/spacetelescope/pylunch/tree/master/session3</a></p>
+<p>A prettified version is here:</p>
+<p><a href="http://spacetelescope.github.io/pylunch">http://spacetelescope.github.io/pylunch</a></p>
+<p>If you have not yet signed to the mailing list, please do so here:</p>
+<p><a href="http://bit.ly/stsci-pylunch-signup">http://bit.ly/stsci-pylunch-signup</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Numpy">Numpy<a class="anchor-link" href="#Numpy">&#182;</a></h1><p>NumPy is an acronym for "Numeric Python" or "Numerical Python". It is an open source extension module for Python, which provides fast precompiled functions for mathematical and numerical routines. Furthermore, NumPy enriches the programming language Python with powerful data structures for efficient computation of multi-dimensional arrays and matrices. The implementation is even aiming at huge matrices and arrays. Besides that the module supplies a large library of high-level mathematical functions to operate on these matrices and arrays.</p>
+<p>Important subtle difference from e.g., MATLAB or IDL: numpy arrays are <em>not</em> part of the core language.  So they can be developed, extend, and modified without installing a new python.</p>
+
 </div>
 </div>
 </div><div class="fragment">
@@ -261,27 +278,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Programming oriented around objects</p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>"object"</strong> : A structure with both data <em>and</em> functions</p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Similar to a C or IDL <code>struct</code>, but with functions "bound" to them.</p>
+<p><img src="numpy.png" style="background:none; border:none; box-shadow:none; display:inline; margin:0; vertical-align:middle;" width="100%"></p>
 
 </div>
 </div>
@@ -291,89 +288,54 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="How-do-you-use-an-object?">How do you use an object?<a class="anchor-link" href="#How-do-you-use-an-object?">&#182;</a></h1>
+<p>Advantages of using Numpy with Python:</p>
+<ul>
+<li>array-oriented computing</li>
+<li>efficiently implemented multi-dimensional arrays</li>
+<li>designed for scientific computation</li>
+</ul>
+<p>But before we dive into Numpy, let's take a detour through Python data types...</p>
+
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Python-Data-Types">Python Data Types<a class="anchor-link" href="#Python-Data-Types">&#182;</a></h2><p>Python has five standard data types.</p>
+<ul>
+<li>Number</li>
+<li>String</li>
+<li>List </li>
+<li>Tuple</li>
+<li>Dictionary</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../README.md&#39;</span><span class="p">)</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Numbers can be integers (including long), float, complex or boolean</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Integer:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 
-</div>
-</div>
-</div>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">51924361948403939480293840938</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Long integer:&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
 
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span><span class="o">.</span><span class="n">name</span>
-</pre></div>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">10.7</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Float&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 
-</div>
-</div>
-</div>
+<span class="n">t</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Boolean: &#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&apos;../README.md&apos;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&apos;PyLunch Nova &lt;sup&gt;*&lt;/sup&gt;\n&apos;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fobj</span><span class="o">.</span><span class="n">tell</span><span class="p">())</span>
-<span class="n">fobj</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fobj</span><span class="o">.</span><span class="n">tell</span><span class="p">())</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mf">9.322e-36</span><span class="n">j</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Complex:&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -386,8 +348,11 @@ a.anchor-link {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>26
-52
+<pre>Integer: 5 &lt;class &apos;int&apos;&gt;
+Long integer: 51924361948403939480293840938 &lt;class &apos;int&apos;&gt;
+Float 10.7 &lt;class &apos;float&apos;&gt;
+Boolean:  True &lt;class &apos;bool&apos;&gt;
+Complex: 9.322e-36j &lt;class &apos;complex&apos;&gt;
 </pre>
 </div>
 </div>
@@ -395,78 +360,379 @@ a.anchor-link {
 </div>
 </div>
 
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Why-do-we-care-about-objects?">Why do we care about objects?<a class="anchor-link" href="#Why-do-we-care-about-objects?">&#182;</a></h1>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Everything</strong> in Python is an object. (Even the classes themselves! Mind-bending...)</p>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Strings are straight-forward as we saw with &#39;Hellow World!&#39;</span>
+
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;A moose once bit my sister.&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Objects hide details you don't care about (E.g., where am I in the file), and provide a unified view of what you do.</p>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>A moose once bit my sister.
+</pre>
+</div>
+</div>
 
 </div>
 </div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Objects make it easier for you to extend someone else's work without (E.g., domain-specific coordinates in <code>astropy</code>, your own point spread function in <code>photutils</code>).</p>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Lists are the ones most similar to arrays, but not quite.</span>
+<span class="n">ll</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">23.6</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span> <span class="c1">### &lt;---- lists use square brackets!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ll</span><span class="p">)</span>
+
+<span class="c1"># Lists are easy to append! Use in cases where you do not know the size of the input array!</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ll</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">num</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tt</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">num</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">))</span>
+</pre></div>
 
 </div>
 </div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Some-More-Terminology">Some More Terminology<a class="anchor-link" href="#Some-More-Terminology">&#182;</a></h1><ul>
-<li><strong>"method"</strong>: A function that's attached ("<strong>bound</strong>") to an object.</li>
-</ul>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1.2, 23.6, &apos;foo&apos;, 11]
+[1.2, 23.6, &apos;foo&apos;, 11, &apos;temp&apos;]
+6
+</pre>
+</div>
+</div>
 
 </div>
 </div>
-</div><div class="fragment">
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Tuples: similar to lists, but have an interesting quality: once created they cannot be changed.</span>
+<span class="c1"># i.e., they are &quot;immutable&quot;, they cannot be sorted, appended, etc.</span>
+<span class="c1"># This is good for certain cases (e.g. they can be keys to a dictionary, let you &quot;protect&quot; data), </span>
+<span class="c1"># but generally are useful for scientific computing than lists/arrays</span>
+
+<span class="n">tup</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">6.7</span><span class="p">)</span> <span class="c1">### &lt;---- use rounded brackets for tuples</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tup</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">tup</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(1, 2, 3, 6.7) &lt;class &apos;tuple&apos;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Dictionaries: we are just mentioning here that they exist. More elsewhere.</span>
+
+<span class="n">dd</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;lock&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dd</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{&apos;key&apos;: 2, &apos;lock&apos;: 1}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Numpy-Data-Types">Numpy Data Types<a class="anchor-link" href="#Numpy-Data-Types">&#182;</a></h2><p>Numpy arrays are a different data type, beyond the five above: the ndarray. Numpy arrays can only contain one type of data but there are lots of options as to what that type is. A full list of Numpy data types can be found here:</p>
+<p><a href="http://docs.scipy.org/doc/numpy/user/basics.types.html">http://docs.scipy.org/doc/numpy/user/basics.types.html</a></p>
 <ul>
-<li><strong>"class"</strong>: The "template" for an object (defines the methods and sometimes default data).  By convention uses a CamelCase name like <code>MyClassName</code>.</li>
+<li>Always use the smallest data type that is appropriate for your data.</li>
+<li>Do not append to numpy arrays: it is hugely inefficient!  This is what <code>list</code>s are good for.</li>
 </ul>
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"instance"</strong>: One particular object of a class (E.g. "that object is an instance of class File")</li>
-</ul>
+<h2 id="Array-Creation">Array Creation<a class="anchor-link" href="#Array-Creation">&#182;</a></h2><p>Full list is here:
+<a href="http://docs.scipy.org/doc/numpy-1.10.1/reference/routines.array-creation.html">http://docs.scipy.org/doc/numpy-1.10.1/reference/routines.array-creation.html</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># values evenly spaced within an interval, specify the STEP:</span>
+<span class="c1"># np.arange(start, stop, step)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> <span class="c1"># if you don&#39;t specify the data type, Python will use the one that takes the least space</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[67]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9.])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># values evenly spaced within an interval, specify the NUMBER OF VALUES:</span>
+<span class="c1"># np.linspace(star, stop, num=10)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+
+<span class="c1"># there is also np.logspace</span>
+<span class="c1">#np.logspace(0,1,10)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[68]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create array from existing data:</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[69]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([1, 2, 3, 4, 5])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># another way to get a pre-filled array is to set all values to ones, zeros, or leave them empty:</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ones:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Zeros:&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">str</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Empty:&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Ones: [ 1.  1.  1.  1.  1.  1.  1.  1.  1.  1.]
+Zeros: [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
+Empty: [&apos;&apos; &apos;&apos; &apos;&apos; &apos;&apos; &apos;&apos; &apos;&apos; &apos;&apos; &apos;&apos; &apos;&apos; &apos;&apos;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if you already have an array A and want one that is the same size but with different values,</span>
+<span class="c1"># here are a couple handy ways to accomplish this</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Zeros: &#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ones: &#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Empty: &#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Zeros:  [[ 0.  0.  0.]
+ [ 0.  0.  0.]
+ [ 0.  0.  0.]]
+Ones:  [[ 1.  1.  1.]
+ [ 1.  1.  1.]
+ [ 1.  1.  1.]]
+Empty:  [[ 0.  0.  0.]
+ [ 0.  0.  0.]
+ [ 0.  0.  0.]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can explore other options on your own.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Numpy-Exercises">Numpy Exercises<a class="anchor-link" href="#Numpy-Exercises">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>1)</strong> Create a one-dimensional array, print the <code>length</code> and <code>shape</code> of the array</p>
 
 </div>
 </div>
@@ -476,321 +742,222 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"instantiate/initialize"</strong>: Creating a new instance of a class</li>
-</ul>
+<p><strong>2)</strong> Create a two-dimensional array, print the <code>length</code> and <code>shape</code> of the array</p>
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong><code>__init__</code></strong>: A special name Python uses for the method called when a new object is instantiated</li>
-</ul>
+<p><strong>3)</strong> Add the two arrays created above -- what happens?</p>
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"subclass"</strong>: A class that has everything some other class has, plus more (for <strong>"inheritance"</strong>)</li>
-</ul>
+<p><strong>4)</strong> Create a 100 x 100 array of integers, and trim off the top/bottom rows, and left/right columns</p>
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Some-Examples-(For-you-to-try!)">Some Examples (For you to try!)<a class="anchor-link" href="#Some-Examples-(For-you-to-try!)">&#182;</a></h1><p>Go to <a href="https://github.com/spacetelescope/pylunch">https://github.com/spacetelescope/pylunch</a> and clone it (if you know git).  Then just find the <code>Object Oriented Intro.ipynb</code> file.</p>
-<h2 id="Or">Or<a class="anchor-link" href="#Or">&#182;</a></h2><p>Go to the same page and click on: <code>session2</code> -&gt; <code>Object Oriented Intro.ipynb</code>.  Then right click on the "Raw" button (upper right), and "save link as"/"download link" (or whatever is similar for your browser).  Or just use <a href="https://raw.githubusercontent.com/spacetelescope/pylunch/master/session2/Object%20Oriented%20Intro.ipynb">this link</a> (its the same thing).</p>
-<h2 id="Then">Then<a class="anchor-link" href="#Then">&#182;</a></h2><p>Once you've got it locally, open a terminal, <code>cd</code> into that directory, and run the command <code>jupyter notebook</code>.</p>
+<p><strong>5)</strong> Write out and use an index array to select out positive values from this array</p>
+
+<pre><code>np.array([1, -1, -2, 3, -5])</code></pre>
 
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Point/Circle-Example">Point/Circle Example<a class="anchor-link" href="#Point/Circle-Example">&#182;</a></h2><p>A point in 2D space has two coordinates.  A circle can be thought of as a point with a radius.  This is a common use of inheritance: we'll need to define a <code>Point</code> class to store the <code>x</code> and <code>y</code> positions, and a <code>Circle</code> class (which is a subclass of <code>Point</code>), which also has a <code>radius</code>.</p>
-<p>Along the way we'll also implement methods to draw the objects (using the <code>matplotlib</code> plotting package).  Don't worry about the details of anything that starts with <code>plt</code>, just know that it's calling <code>matploltlib</code> to actually make the plots.</p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># This cell has some stuff needed to make the &quot;draw&quot; methods work.  It&#39;s not </span>
-<span class="c1"># important to understand them for now, but you do need to run them to  get</span>
-<span class="c1"># things to work in the notebook</span>
-
-<span class="c1"># This makes notebooks render plots inside the notebook</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="c1"># And these are imports from the &quot;matplotlib&quot; plotting package (more on that in a future session)</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-</pre></div>
+<p><strong>6)</strong> Experiment with <code>arange</code>, <code>ones</code>, and <code>zeros</code> to create arrays of different shapes</p>
 
 </div>
 </div>
 </div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="c1"># this is the method that gets called when you create a new Point</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-        
-    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">])</span>
-
-    
-<span class="c1"># if you&#39;re on python 2.x, the top line should be:</span>
-<span class="c1">#class Point(object):</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>  <span class="c1"># You can just call draw, and not worry at all about *how* the drawing happens</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Circle</span><span class="p">(</span><span class="n">Point</span><span class="p">):</span>  <span class="c1"># This means &quot;define a class Circle that is a subclass of Point&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-        <span class="c1"># can also be this (works in py 2.x):</span>
-        <span class="c1">#Point.__init__(self, x, y)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
-    
-    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># this method &quot;overrides&quot; the `draw` method of Point</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Circle</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-        <span class="c1"># can also be this (works in py 2.x):</span>
-        <span class="c1">#Point.draw(self)</span>
-        <span class="c1"># note for people not familiar with matplotlib: alpha keyword below sets transparency</span>
-        <span class="n">circle_patch</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle_patch</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">compute_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">pi</span>
-        <span class="k">return</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pointishes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">pointishes</span><span class="p">:</span>
-    <span class="n">obj</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> <span class="c1"># again, all I need to know is that they &quot;can be drawn&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pointishes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">compute_area</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&quot;Astronomer&quot;-Example">"Astronomer" Example<a class="anchor-link" href="#&quot;Astronomer&quot;-Example">&#182;</a></h2><p>This is a more complex class heirarchy, which includes demonstrating multiple inheritance by way of the "diamond" pattern illustrated below.  Also a fairly cynical view of how our science gets done.</p>
-<p><img src="AstronomerClassHeirarchy.svg" width=40%></p>
+<p><strong>7)</strong> Using a boolean array mask, select out the elements of the following array between 5 and 10:</p>
+
+<pre><code>np.array([0.6429498677659073, 1.150547235455569, 1.1915607017440888, 8.283179653420964, 5.1635384867953595, 8.06221365954315, 5.941607350505754, 9.426996923221827, 9.828300195624534, 8.061581259382875, 9.350471376998248, 2.5337332496612266, 3.8933693630535062, 7.854245437743151, 0.7965058455412621, 2.7207245408915623, 4.693244676240291, 1.3620057998648716, 8.880004623574631, 6.504379354779315])</code></pre>
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Boolean-Array-Indexing-or-Why-You-Should-Never-Use-np.where">Boolean Array Indexing or Why You Should Never Use np.where<a class="anchor-link" href="#Boolean-Array-Indexing-or-Why-You-Should-Never-Use-np.where">&#182;</a></h2><p>If you come from IDL, you probably LOVE the "where" function. A similar function exists in Numpy:</p>
+
+</div>
+</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Astronomer</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span> <span class="o">=</span> <span class="p">[]</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;What, you think astronomers are all alike? Pick something more specific.&quot;</span><span class="p">)</span>
-        
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">cv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ll</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Indexes: &#39;</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Selection: &#39;</span><span class="p">,</span> <span class="n">ll</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></section><section>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Indexes:  (array([10, 11, 12, 13, 14, 15, 16, 17, 18, 19]),)
+Selection:  [ 10.52631579  11.57894737  12.63157895  13.68421053  14.73684211
+  15.78947368  16.84210526  17.89473684  18.94736842  20.        ]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But. You should not use it. Why? Because boolean arrays.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Observer</span><span class="p">(</span><span class="n">Astronomer</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">favorite_targets</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="o">=</span> <span class="n">favorite_targets</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">target</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">()</span>
-        
-        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Sucessfully observed &#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Failed to observe &#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span>
-    
-    <span class="n">success_rate</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>  <span class="c1"># TAC+weather if you&#39;re ground based, maybe?</span>
-    <span class="k">def</span> <span class="nf">observe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        
-        <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>        
-        <span class="n">success</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_rate</span>
-        
-        <span class="k">return</span> <span class="n">target</span><span class="p">,</span> <span class="n">success</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">13</span><span class="p">])</span>
+<span class="n">a</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="c1"># the result is a boolean array!</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></section><section>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[40]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([False, False, False,  True,  True,  True], dtype=bool)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Theorist</span><span class="p">(</span><span class="n">Astronomer</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">theory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_theory</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Foundational work on theory of &#39;</span> <span class="o">+</span> <span class="n">theory</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">make_theory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        <span class="c1"># Eh, we just make it all up anyway</span>
-        <span class="n">theory</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">97</span><span class="o">+</span><span class="mi">25</span><span class="p">))</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
-            <span class="n">theory</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">97</span><span class="o">+</span><span class="mi">25</span><span class="p">))</span>
-            
-        <span class="k">return</span> <span class="n">theory</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># expressions can be combined: </span>
+<span class="c1"># &quot;|&quot; == &quot;or&quot;</span>
+<span class="c1"># &quot;&amp;&quot; == &quot;and&quot;</span>
+<span class="c1"># must use | and &amp; with numpy arrays</span>
+
+<span class="nb">print</span><span class="p">((</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">((</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">))</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></section><section>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[ True False False  True  True  True]
+[False False  True  True  True False]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Hybrid</span><span class="p">(</span><span class="n">Observer</span><span class="p">,</span> <span class="n">Theorist</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fraction_theorist</span><span class="p">,</span> <span class="n">favorite_targets</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">favorite_targets</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fraction_theorist</span> <span class="o">=</span> <span class="n">fraction_theorist</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fraction_theorist</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_theory</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">target</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Used </span><span class="si">{}</span><span class="s1"> to prove theory </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Used </span><span class="si">{}</span><span class="s1"> to falsify theory </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># &quot;~&quot; is the inverse operator:</span>
+<span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></section><section>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[48]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([False, False,  True], dtype=bool)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">iva_momcheva</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">([</span><span class="s1">&#39;AEGIS&#39;</span><span class="p">,</span> <span class="s1">&#39;COSMOS&#39;</span><span class="p">,</span> <span class="s1">&#39;GOODS&#39;</span><span class="p">,</span> <span class="s1">&#39;UDS&#39;</span><span class="p">,</span> <span class="s1">&#39;Clg J0218.3-0510&#39;</span><span class="p">,</span> <span class="s1">&#39;assorted fancy lens clusters&#39;</span><span class="p">])</span>
-<span class="n">erik_tollerud</span> <span class="o">=</span> <span class="n">Hybrid</span><span class="p">(</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;an M31 satellite&#39;</span><span class="p">,</span> <span class="s1">&#39;a Milky Way satellite&#39;</span><span class="p">,</span> <span class="s1">&#39;an isolated LG Dwarf&#39;</span><span class="p">,</span> <span class="s1">&#39;a Local Volume Dwarf&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># How is this useful? </span>
 
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">iva_momcheva</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-    <span class="n">erik_tollerud</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-    
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Erik&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">erik_tollerud</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Iva&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">iva_momcheva</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fritz_zwicky</span> <span class="o">=</span> <span class="n">Theorist</span><span class="p">()</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">):</span>
-    <span class="n">fritz_zwicky</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zwicky&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fritz_zwicky</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">ra</span> <span class="o">&gt;</span> <span class="mf">11.1324</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">ra</span> <span class="o">&lt;</span> <span class="mf">31.5134</span><span class="p">)</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">ra</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<span class="n">not_selected</span> <span class="o">=</span> <span class="n">ra</span><span class="p">[</span><span class="o">~</span><span class="n">idx</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -803,14 +970,10 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Other-resources/examples">Other resources/examples<a class="anchor-link" href="#Other-resources/examples">&#182;</a></h1><ul>
-<li>Some "business"-oriented example of object-oriented programming and interitance in Python:<ul>
-<li><a href="http://www.tutorialspoint.com/python/python_classes_objects.htm">http://www.tutorialspoint.com/python/python_classes_objects.htm</a></li>
-<li><a href="https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/">https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/</a></li>
-</ul>
-</li>
-<li>If you're into role-playing games: <a href="http://inventwithpython.com/blog/2014/12/02/why-is-object-oriented-programming-useful-with-an-role-playing-game-example/">http://inventwithpython.com/blog/2014/12/02/why-is-object-oriented-programming-useful-with-an-role-playing-game-example/</a></li>
-<li>The class heirarchy of <code>astropy.coordinates</code>: <a href="http://docs.astropy.org/en/stable/coordinates/index.html#class-inheritance-diagram">http://docs.astropy.org/en/stable/coordinates/index.html#class-inheritance-diagram</a>, and the documentation for how to make your own custom frames: <a href="http://docs.astropy.org/en/stable/coordinates/frames.html#defining-a-new-frame">http://docs.astropy.org/en/stable/coordinates/frames.html#defining-a-new-frame</a></li>
+<h2 id="Numpy-Array-Indexing">Numpy Array Indexing<a class="anchor-link" href="#Numpy-Array-Indexing">&#182;</a></h2><ul>
+<li>zero-indexed</li>
+<li>non-inclusiveness</li>
+<li>y1:y2, x1:x2</li>
 </ul>
 
 </div>
@@ -821,14 +984,77 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Now-some-ideas-to-play-around-with:">Now some ideas to play around with:<a class="anchor-link" href="#Now-some-ideas-to-play-around-with:">&#182;</a></h1><ul>
-<li>Extend the Point/Circle heirarchy to include Ellipse, or maybe Square (requires some knowledge of matplotlib)</li>
-<li>Extend the Astronomer heirarchy.  Maybe specific kinds of observers?</li>
-<li>Make your own "toy" class heirarchy from scratch.  Make sure to actually instantitate some objects and test that they work</li>
-<li>Chat with someone about or hack on a class heirarchy for some of your own data reduction/analysis code.</li>
-<li>Try more complicated multiple inheritance heirarchies, and try to infer how <code>super()</code> works (you'll probably have some surprises!).</li>
-<li>If you think you already understand classes and want to blow your mind: Experiment with metaclasses (E.g., <a href="https://docs.python.org/3/reference/datamodel.html#customizing-class-creation">https://docs.python.org/3/reference/datamodel.html#customizing-class-creation</a>)</li>
+<h2 id="Other-Handy-Numpy-Functions">Other Handy Numpy Functions<a class="anchor-link" href="#Other-Handy-Numpy-Functions">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Randoms</span>
+<span class="c1"># https://docs.scipy.org/doc/numpy-dev/reference/routines.random.html</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Linear algebra:</span>
+<span class="c1"># https://docs.scipy.org/doc/numpy-dev/reference/routines.linalg.html</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Stats</span>
+<span class="c1"># https://docs.scipy.org/doc/numpy-dev/reference/routines.statistics.html</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Other-Resources">Other Resources<a class="anchor-link" href="#Other-Resources">&#182;</a></h2><ul>
+<li>Numpy documentation:</li>
 </ul>
+<p><a href="http://docs.scipy.org/doc/numpy/">http://docs.scipy.org/doc/numpy/</a></p>
+<ul>
+<li>Numpy documentation quickstart:</li>
+</ul>
+<p><a href="http://docs.scipy.org/doc/numpy/user/quickstart.html">http://docs.scipy.org/doc/numpy/user/quickstart.html</a></p>
+<ul>
+<li>Numpy documentation basics:</li>
+</ul>
+<p><a href="http://docs.scipy.org/doc/numpy/user/basics.html">http://docs.scipy.org/doc/numpy/user/basics.html</a></p>
+<ul>
+<li>Good Tutorial:</li>
+</ul>
+<p><a href="http://www.python-course.eu/numpy.php">http://www.python-course.eu/numpy.php</a></p>
+<ul>
+<li>Another tutorial, which has a similar approach to ours:</li>
+</ul>
+<p><a href="http://cs231n.github.io/python-numpy-tutorial/">http://cs231n.github.io/python-numpy-tutorial/</a></p>
 
 </div>
 </div>
