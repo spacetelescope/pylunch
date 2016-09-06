@@ -12130,7 +12130,7 @@ try that but with "anaconda" replaced by your current conda environment.  If you
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fib_py</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -12148,7 +12148,7 @@ try that but with "anaconda" replaced by your current conda environment.  If you
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
@@ -12168,14 +12168,14 @@ try that but with "anaconda" replaced by your current conda environment.  If you
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Python version:&#39;</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> fib_py(1000000)
+<span class="o">%</span><span class="k">timeit</span> -n 1 -r 1 fib_py(1000000)
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cython version:&#39;</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> fib_cy(1000000)
+<span class="o">%</span><span class="k">timeit</span> -n 1 -r 1 fib_cy(1000000)
 </pre></div>
 
 </div>
@@ -12189,9 +12189,9 @@ try that but with "anaconda" replaced by your current conda environment.  If you
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Python version:
-100000 loops, best of 3: 1.96 µs per loop
+1 loop, best of 1: 4.29 µs per loop
 Cython version:
-1000000 loops, best of 3: 1.01 µs per loop
+1 loop, best of 1: 2.3 µs per loop
 </pre>
 </div>
 </div>
@@ -12209,7 +12209,17 @@ Cython version:
 
 </div>
 </div>
-</div></section></section><section><section>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Aside">Aside<a class="anchor-link" href="#Aside">&#182;</a></h4><p><small> The `-n 1 -r 1` bit above makes it do just *one* run of the code.  That's important here because some machines will cache the results, giving inaccurate timing measurements of the actual algorithm.  Sometimes that's *not* what you want, because the caching actually helps in real practical code... But for this example it's deceptive. </small></p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12714,7 +12724,7 @@ static PyObject *__pyx_pf_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_fib_c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">-</span><span class="n">a</span>
@@ -12737,7 +12747,7 @@ static PyObject *__pyx_pf_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_fib_c
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <!DOCTYPE html>
@@ -13203,7 +13213,7 @@ static PyObject *__pyx_pf_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_fib_c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">-</span><span class="n">a</span>
@@ -13227,7 +13237,7 @@ static PyObject *__pyx_pf_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_fib_c
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <!DOCTYPE html>
@@ -13682,7 +13692,7 @@ static PyObject *__pyx_pf_46_cython_magic_b2ecfce6889f340454f93e2264899042_fib_c
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Baseline Python:&#39;</span><span class="p">)</span>
@@ -13706,13 +13716,13 @@ static PyObject *__pyx_pf_46_cython_magic_b2ecfce6889f340454f93e2264899042_fib_c
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Baseline Python:
-1 loop, best of 1: 5.32 µs per loop
+1 loop, best of 1: 4.24 µs per loop
 No C types:
-1 loop, best of 1: 2.77 µs per loop
+1 loop, best of 1: 2.56 µs per loop
 Some C types:
-1 loop, best of 1: 2.39 µs per loop
+1 loop, best of 1: 2.08 µs per loop
 All C types:
-1 loop, best of 1: 1.31 µs per loop
+1 loop, best of 1: 1.1 µs per loop
 </pre>
 </div>
 </div>
@@ -13743,7 +13753,7 @@ All C types:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">primes_py</span><span class="p">(</span><span class="n">kmax</span><span class="p">):</span>
@@ -13824,7 +13834,7 @@ All C types:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ap2b_py</span><span class="p">(</span><span class="n">a</span> <span class="p">,</span><span class="n">b</span><span class="p">):</span>
@@ -13838,7 +13848,7 @@ All C types:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
@@ -13870,7 +13880,7 @@ All C types:
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13890,8 +13900,8 @@ All C types:
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>10 loops, best of 3: 63.2 ms per loop
-10 loops, best of 3: 34.8 ms per loop
+<pre>10 loops, best of 3: 62.8 ms per loop
+10 loops, best of 3: 36.4 ms per loop
 </pre>
 </div>
 </div>
@@ -13992,7 +14002,7 @@ you can then just use <code>c_function(a, b)</code> in a Cython function and it 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Final-thoughts">Final thoughts<a class="anchor-link" href="#Final-thoughts">&#182;</a></h1><p>Cython is not the only way to speed numerical code up in python.</p>
+<h1 id="Other-options">Other options<a class="anchor-link" href="#Other-options">&#182;</a></h1><p>Cython is not the only way to speed numerical code up in python.</p>
 <ul>
 <li>Numba (<a href="http://numba.pydata.org/">http://numba.pydata.org/</a>) is an up-and-coming package that claims to do much of what Cython does, but without explicit compilation needed. </li>
 <li>HOPE (<a href="http://www.cosmology.ethz.ch/research/software-lab/HOPE.html">http://www.cosmology.ethz.ch/research/software-lab/HOPE.html</a>) is a similar package developed by astronomers (which can be a positive or negative, depending on your POV).  </li>
@@ -14009,13 +14019,27 @@ you can then just use <code>c_function(a, b)</code> in a Cython function and it 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="For-the-remaining-time...">For the remaining time...<a class="anchor-link" href="#For-the-remaining-time...">&#182;</a></h1><p>Explore!  If you have a C code of your own, perhaps you can try writing a Python interface to it.  If you don't, you could work through some of the earlier examples, or try a couple astronomy-centric exercises - you might start by writing it in Python and then adapting it to Cython...:</p>
+<ul>
+<li>Write a Cython function to simulate a ground-based image of a nearby galaxy, given a star catalog (in the real case this would be from e.g. HST or JWST, but you could just make a random list, here).  It's probably easiest to assume Gaussian seeing (of ~1"), but you can always try </li>
+<li>Write a Cython function that convolves an image (a 2D numpy array) with a small kernel (another 2D numpy array, say 5x5).  (You'd probably want to use <a href="http://docs.astropy.org/en/stable/convolution/">astropy.convolution</a> for this in a real science situation... But that is, itself implemented in Cython, so you could look at astropy's code for ideas) </li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Answer-to-Exercise">Answer to Exercise<a class="anchor-link" href="#Answer-to-Exercise">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
@@ -14047,7 +14071,7 @@ you can then just use <code>c_function(a, b)</code> in a Cython function and it 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> primes_py(1000)
@@ -14064,12 +14088,107 @@ you can then just use <code>c_function(a, b)</code> in a Cython function and it 
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>10 loops, best of 3: 82.6 ms per loop
-1000 loops, best of 3: 2.06 ms per loop
+<pre>10 loops, best of 3: 86 ms per loop
+100 loops, best of 3: 1.96 ms per loop
 </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Possible-answer-to-&quot;simulate-galaxy&quot;-exercise">Possible answer to "simulate galaxy" exercise<a class="anchor-link" href="#Possible-answer-to-&quot;simulate-galaxy&quot;-exercise">&#182;</a></h1><p>(This is just one of many ways to do it... But I had to do this myself once, so here's how I did it:)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+
+<span class="k">import</span> <span class="nn">cython</span>
+<span class="k">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">exp</span>
+
+<span class="k">cdef</span> <span class="kt">double</span> <span class="nf">PI</span> <span class="o">=</span> <span class="mf">3.141592653589793</span>
+
+<span class="nd">@cython</span><span class="o">.</span><span class="n">cdivision</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span> 
+<span class="k">cdef</span> <span class="kr">inline</span> <span class="kt">double</span> <span class="nf">ngauss2d</span><span class="p">(</span><span class="n">double</span> <span class="n">x</span><span class="p">,</span> <span class="n">double</span> <span class="n">y</span><span class="p">,</span> <span class="n">double</span> <span class="n">sig</span><span class="p">):</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="nf">tsigsq</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">sig</span><span class="o">*</span><span class="n">sig</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">tsigsq</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tsigsq</span> <span class="o">*</span> <span class="n">PI</span><span class="p">)</span>
+
+<span class="nd">@cython</span><span class="o">.</span><span class="n">wraparound</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="nd">@cython</span><span class="o">.</span><span class="n">boundscheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="nd">@cython</span><span class="o">.</span><span class="n">nonecheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">convolve</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid</span><span class="p">,</span> <span class="n">fluxes</span><span class="p">,</span> <span class="n">cenx</span><span class="p">,</span> <span class="n">ceny</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convolves a star catalog with Gaussian seeing to produce an artificial</span>
+<span class="sd">    ground-based/distant image.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data: 2D array</span>
+<span class="sd">        An array to add the simulated image to</span>
+<span class="sd">    xgrid: 2D array</span>
+<span class="sd">        The x-values of each pixel in `data` - must be the same shape as `data`.</span>
+<span class="sd">    ygrid: 2D array</span>
+<span class="sd">        The y-values of each pixel in `data` - must be the same shape as `data`.</span>
+<span class="sd">    fluxes: 1D array</span>
+<span class="sd">        The flux in each star</span>
+<span class="sd">    cenx: 1D array</span>
+<span class="sd">        The x-position of the center of each star - must be the same shape as `fluxes`.</span>
+<span class="sd">    ceny: 1D array</span>
+<span class="sd">        The y-position of the center of each star - must be the same shape as `fluxes`.</span>
+<span class="sd">    fwhm: float</span>
+<span class="sd">        The FWHM of the &quot;seeing&quot;. E.g., the gaussian convolution kernel. </span>
+<span class="sd">        (In the same units as `xgrid`, `ygrid`, `cenx`, and `ceny`).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log</span>
+    <span class="k">import</span> <span class="nn">time</span>
+    
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:,</span> <span class="p">:]</span> <span class="n">data_view</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:,</span> <span class="p">:]</span> <span class="n">xgrid_view</span> <span class="o">=</span> <span class="n">xgrid</span>
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:,</span> <span class="p">:]</span> <span class="n">ygrid_view</span> <span class="o">=</span> <span class="n">ygrid</span>
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:]</span> <span class="n">fluxes_view</span> <span class="o">=</span> <span class="n">fluxes</span>
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:]</span> <span class="n">cenx_view</span> <span class="o">=</span> <span class="n">cenx</span>
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:]</span> <span class="n">ceny_view</span> <span class="o">=</span> <span class="n">ceny</span>
+    
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">I</span><span class="p">,</span> <span class="nf">J</span><span class="p">,</span> <span class="nf">S</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="nf">sig</span> <span class="o">=</span> <span class="n">fwhm</span><span class="o">/</span><span class="p">(</span><span class="mf">2</span><span class="o">*</span><span class="p">(</span><span class="mf">2</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="mf">2</span><span class="p">))</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">cdef</span> <span class="kt">double</span> <span class="nf">starflux</span><span class="p">,</span> <span class="nf">starx</span><span class="p">,</span> <span class="nf">stary</span><span class="p">,</span> <span class="nf">dx</span><span class="p">,</span> <span class="nf">dy</span>
+    
+    <span class="n">I</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">fluxes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">xgrid</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ygrid</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;xgrid or ygrid don&#39;t match data!&quot;</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">cenx</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="n">S</span><span class="p">,)</span> <span class="ow">or</span> <span class="n">ceny</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="n">S</span><span class="p">,):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;cenx or ceny don&#39;t match fluxes!&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+        <span class="n">starflux</span> <span class="o">=</span> <span class="n">fluxes_view</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="n">starx</span> <span class="o">=</span> <span class="n">cenx_view</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="n">stary</span> <span class="o">=</span> <span class="n">ceny_view</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">J</span><span class="p">):</span>
+                <span class="n">dx</span> <span class="o">=</span> <span class="n">starx</span> <span class="o">+</span> <span class="n">xgrid_view</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">dy</span> <span class="o">=</span> <span class="n">stary</span> <span class="o">+</span> <span class="n">ygrid_view</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">data_view</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">starflux</span> <span class="o">*</span> <span class="n">ngauss2d</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
