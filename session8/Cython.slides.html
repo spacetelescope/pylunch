@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>Object Oriented Intro slides</title>
+<title>Cython slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11830,7 +11830,17 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="What-is-Object-Oriented-Programming?">What is Object-Oriented Programming?<a class="anchor-link" href="#What-is-Object-Oriented-Programming?">&#182;</a></h1>
+<h1><img src="Cython-logo.svg" style="background:none; border:none; box-shadow:none; display:inline; margin:0; vertical-align:middle;" width="25%" height="25%"></h1>
+<h3 id="A-tool-for-making-Python-as-fast-as-C/Fortran">A tool for making Python as fast as C/Fortran<a class="anchor-link" href="#A-tool-for-making-Python-as-fast-as-C/Fortran">&#182;</a></h3>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="In-what-way-is-Python-&quot;slow&quot;?">In what way is Python "slow"?<a class="anchor-link" href="#In-what-way-is-Python-&quot;slow&quot;?">&#182;</a></h1>
 </div>
 </div>
 </div><div class="fragment">
@@ -11839,7 +11849,10 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Programming oriented around objects</p>
+<ul>
+<li>It is interpreted*: <code>python</code> is a piece of software (written in C) that executes python code on-the-fly. C/Fortran instead are compiled directly to machine-understadable binary code.</li>
+</ul>
+<p><small>* Actually Python is sorta compiled. But the above is still mostly true. </small></p>
 
 </div>
 </div>
@@ -11849,7 +11862,9 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>"object"</strong> : A structure with both data <em>and</em> functions</p>
+<ul>
+<li>In practice this often isn't important because the basic operations are still the same.  But numerical <code>for</code> loops (especially with function calls) can be a problem.</li>
+</ul>
 
 </div>
 </div>
@@ -11859,7 +11874,141 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Similar to a C or IDL <code>struct</code>, but with functions "bound" to them.</p>
+<ul>
+<li>This is why <code>numpy</code> was invented - it basically does efficient looping.  But sometimes it's not well suited to a problem...</li>
+</ul>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Which-is-clearer?">Which is clearer?<a class="anchor-link" href="#Which-is-clearer?">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I want to know the values from <code>values</code>, which are aligned to <code>ids2</code>, corresponding to the IDs in <code>ids1</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sorti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">ids2</span><span class="p">)</span>
+<span class="n">idsforvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">ids2</span><span class="p">[</span><span class="n">sorti</span><span class="p">],</span> <span class="n">ids1</span><span class="p">)</span>
+<span class="n">new_array</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">sorti</span><span class="p">][</span><span class="n">idsforvals</span><span class="p">]</span>
+
+<span class="c1"># there&#39;s actually a better way to do this in newer numpy versions... </span>
+<span class="c1"># but it&#39;s a contrived example to start with.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ids1</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">ids2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">new_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sometimes loops are just easier to understand... and they can also be faster if they are at "close-to-metal" speed (i.e., C or Fortran)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="What-does-Cython-do-about-that?">What does Cython do about that?<a class="anchor-link" href="#What-does-Cython-do-about-that?">&#182;</a></h1>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Cython is an "optimising static compiler" for Python</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>It can be run on regular Python... But that usually only has a small effect (not worth the trouble), because the C it makes still does everything <code>python</code> does.</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>But you can tell it to behave "like C" by specifying <code>types</code> for variables.  This can speed things up by orders of magnitude.  Turns Cython into a "hybrid" language mixing syntax of Python with capabilities of C.</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Bonus: you can also call C functions directly</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The price is flexibility (and clarity): you can no longer use Python techniques like freely casting an integer to a float</li>
+</ul>
 
 </div>
 </div>
@@ -11869,7 +12018,24 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="How-do-you-use-an-object?">How do you use an object?<a class="anchor-link" href="#How-do-you-use-an-object?">&#182;</a></h1>
+<h1 id="Now-lets-do-a-&quot;hello-world&quot;-example">Now lets do a "hello world" example<a class="anchor-link" href="#Now-lets-do-a-&quot;hello-world&quot;-example">&#182;</a></h1><ul>
+<li>First make sure you have cython installed (<code>conda install cython</code> should work).</li>
+<li>Look at the file <code>hello_world.pyx</code> in the spacetelescope/pylunch repo. </li>
+<li>Open up a terminal and go to the repo and do <code>cython hello_world.pyx</code>.  It should create a <code>hello_world.c</code> file.</li>
+<li>Now compile that file.  This can be tricky to know the right flags.  For me, this worked:
+<pre><code>clang -bundle -undefined dynamic_lookup -L/Users/erik/miniconda3/envs/anaconda/lib -arch x86_64 build/temp.macosx-10.6-x86_64-3.5/astropy/_compiler.o -L/Users/erik/miniconda3/envs/anaconda/lib hello_world.c hello_world.so</code></pre>
+try that but with "anaconda" replaced by your current conda environment.  If you have trouble, check out <a href="http://cython.readthedocs.io/en/latest/src/reference/compilation.html">http://cython.readthedocs.io/en/latest/src/reference/compilation.html</a> .  If you still have trouble, try the method in <a href="http://cython.readthedocs.io/en/latest/src/tutorial/cython_tutorial.html">http://cython.readthedocs.io/en/latest/src/tutorial/cython_tutorial.html</a>, or just wait for a bit.</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="There's-a-much-easier-way-when-experimenting:-the-cython-notebook-extension!">There's a much easier way when experimenting: the cython notebook extension!<a class="anchor-link" href="#There's-a-much-easier-way-when-experimenting:-the-cython-notebook-extension!">&#182;</a></h1>
 </div>
 </div>
 </div><div class="fragment">
@@ -11878,7 +12044,7 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../README.md&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> Cython
 </pre></div>
 
 </div>
@@ -11891,26 +12057,16 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span><span class="o">.</span><span class="n">name</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+
+<span class="k">from</span> <span class="nn">libc.stdio</span> <span class="k">cimport</span> <span class="n">printf</span>
+
+<span class="k">def</span> <span class="nf">do_hello</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;hello world from python&quot;</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello world from c&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;../README.md&#39;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -11920,38 +12076,7 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;PyLunch Nova &lt;sup&gt;*&lt;/sup&gt;\n&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fobj</span><span class="o">.</span><span class="n">tell</span><span class="p">())</span>
-<span class="n">fobj</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fobj</span><span class="o">.</span><span class="n">tell</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">do_hello</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11964,8 +12089,7 @@ a.anchor-link {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>26
-52
+<pre>hello world from python
 </pre>
 </div>
 </div>
@@ -11973,22 +12097,13 @@ a.anchor-link {
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Why-do-we-care-about-objects?">Why do we care about objects?<a class="anchor-link" href="#Why-do-we-care-about-objects?">&#182;</a></h1>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Everything</strong> in Python is an object. (Even the classes themselves! Mind-bending...)</p>
+<p>Note that the C-printed line is missing.  That's expected, but watch out for subtle quirks like this!</p>
 
 </div>
 </div>
@@ -11998,17 +12113,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Objects hide details you don't care about (E.g., where am I in the file), and provide a unified view of what you do.</p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Objects make it easier for you to extend someone else's work without (E.g., domain-specific coordinates in <code>astropy</code>, your own point spread function in <code>photutils</code>).</p>
+<p>In a real code that you're releasing or packaging up for your own use, you'll definitely want to use a proper <code>setup.py</code>, as then you won't have to know all the compiler options you need to provide.  You can see a bit more about that in the Cython docs <a href="http://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#basic-setup-py">here</a>, or you can try using the Astropy <a href="https://github.com/astropy/package-template/">affiliated package template</a>, which comes out-of-the-box ready to include Cython code along side regular Python.</p>
 
 </div>
 </div>
@@ -12018,110 +12123,22 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Some-More-Terminology">Some More Terminology<a class="anchor-link" href="#Some-More-Terminology">&#182;</a></h1><ul>
-<li><strong>"method"</strong>: A function that's attached ("<strong>bound</strong>") to an object.</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"class"</strong>: The "template" for an object (defines the methods and sometimes default data).  By convention uses a CamelCase name like <code>MyClassName</code>.</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"instance"</strong>: One particular object of a class (E.g. "that object is an instance of class File")</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"instantiate/initialize"</strong>: Creating a new instance of a class</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong><code>__init__</code></strong>: A special name Python uses for the method called when a new object is instantiated</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"subclass"</strong>: A class that has everything some other class has, plus more (for <strong>"inheritance"</strong>)</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Some-Examples-(For-you-to-try!)">Some Examples (For you to try!)<a class="anchor-link" href="#Some-Examples-(For-you-to-try!)">&#182;</a></h1><p>Go to <a href="https://github.com/spacetelescope/pylunch">https://github.com/spacetelescope/pylunch</a> and clone it (if you know git).  Then just find the <code>Object Oriented Intro.ipynb</code> file.</p>
-<h2 id="Or">Or<a class="anchor-link" href="#Or">&#182;</a></h2><p>Go to the same page and click on: <code>session2</code> -&gt; <code>Object Oriented Intro.ipynb</code>.  Then right click on the "Raw" button (upper right), and "save link as"/"download link" (or whatever is similar for your browser).  Or just use <a href="https://raw.githubusercontent.com/spacetelescope/pylunch/master/session2/Object%20Oriented%20Intro.ipynb">this link</a> (its the same thing).</p>
-<h2 id="Then">Then<a class="anchor-link" href="#Then">&#182;</a></h2><p>Once you've got it locally, open a terminal, <code>cd</code> into that directory, and run the command <code>jupyter notebook</code>.</p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Point/Circle-Example">Point/Circle Example<a class="anchor-link" href="#Point/Circle-Example">&#182;</a></h2><p>A point in 2D space has two coordinates.  A circle can be thought of as a point with a radius.  This is a common use of inheritance: we'll need to define a <code>Point</code> class to store the <code>x</code> and <code>y</code> positions, and a <code>Circle</code> class (which is a subclass of <code>Point</code>), which also has a <code>radius</code>.</p>
-<p>Along the way we'll also implement methods to draw the objects (using the <code>matplotlib</code> plotting package).  Don't worry about the details of anything that starts with <code>plt</code>, just know that it's calling <code>matploltlib</code> to actually make the plots.</p>
+<h1 id="Why-would-we-want-to-do-this?">Why would we want to do this?<a class="anchor-link" href="#Why-would-we-want-to-do-this?">&#182;</a></h1><p>Consider the two examples below, one in Python and the other in Cython</p>
 
 </div>
 </div>
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># This cell has some stuff needed to make the &quot;draw&quot; methods work.  It&#39;s not </span>
-<span class="c1"># important to understand them for now, but you do need to run them to  get</span>
-<span class="c1"># things to work in the notebook</span>
-
-<span class="c1"># This makes notebooks render plots inside the notebook</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="c1"># And these are imports from the &quot;matplotlib&quot; plotting package (more on that in a future session)</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fib_py</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Fibonacci series up to n.&quot;&quot;&quot;</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">b</span>
 </pre></div>
 
 </div>
@@ -12131,265 +12148,64 @@ a.anchor-link {
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="c1"># this is the method that gets called when you create a new Point</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-        
-    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
 
-    
-<span class="c1"># if you&#39;re on python 2.x, the top line should be:</span>
-<span class="c1">#class Point(object):</span>
+<span class="k">def</span> <span class="nf">fib_cy</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Fibonacci series up to n.&quot;&quot;&quot;</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">b</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div><div class="fragment">
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>  <span class="c1"># You can just call draw, and not worry at all about *how* the drawing happens</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Python version:&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> fib_py(1000000)
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cython version:&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> fib_cy(1000000)
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Circle</span><span class="p">(</span><span class="n">Point</span><span class="p">):</span>  <span class="c1"># This means &quot;define a class Circle that is a subclass of Point&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-        <span class="c1"># can also be this (works in py 2.x):</span>
-        <span class="c1">#Point.__init__(self, x, y)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
-    
-    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># this method &quot;overrides&quot; the `draw` method of Point</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Circle</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-        <span class="c1"># can also be this (works in py 2.x):</span>
-        <span class="c1">#Point.draw(self)</span>
-        <span class="c1"># note for people not familiar with matplotlib: alpha keyword below sets transparency</span>
-        <span class="n">circle_patch</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle_patch</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">compute_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">pi</span>
-        <span class="k">return</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
-</pre></div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Python version:
+100000 loops, best of 3: 1.96 µs per loop
+Cython version:
+1000000 loops, best of 3: 1.01 µs per loop
+</pre>
+</div>
+</div>
 
 </div>
 </div>
-</div>
-
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pointishes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">pointishes</span><span class="p">:</span>
-    <span class="n">obj</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> <span class="c1"># again, all I need to know is that they &quot;can be drawn&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pointishes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">compute_area</span><span class="p">())</span>
-</pre></div>
 
 </div>
-</div>
-</div>
-
-</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&quot;Astronomer&quot;-Example">"Astronomer" Example<a class="anchor-link" href="#&quot;Astronomer&quot;-Example">&#182;</a></h2><p>This is a more complex class heirarchy, which includes demonstrating multiple inheritance by way of the "diamond" pattern illustrated below.  Also a fairly cynical view of how our science gets done.</p>
-<p><img src="AstronomerClassHeirarchy.svg" width=40%></p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Astronomer</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span> <span class="o">=</span> <span class="p">[]</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;What, you think astronomers are all alike? Pick something more specific.&quot;</span><span class="p">)</span>
-        
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">cv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Observer</span><span class="p">(</span><span class="n">Astronomer</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">favorite_targets</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="o">=</span> <span class="n">favorite_targets</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">target</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">()</span>
-        
-        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Sucessfully observed &#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Failed to observe &#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span>
-    
-    <span class="n">success_rate</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>  <span class="c1"># TAC+weather if you&#39;re ground based, maybe?</span>
-    <span class="k">def</span> <span class="nf">observe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        
-        <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>        
-        <span class="n">success</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_rate</span>
-        
-        <span class="k">return</span> <span class="n">target</span><span class="p">,</span> <span class="n">success</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Theorist</span><span class="p">(</span><span class="n">Astronomer</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">theory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_theory</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Foundational work on theory of &#39;</span> <span class="o">+</span> <span class="n">theory</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">make_theory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        <span class="c1"># Eh, we just make it all up anyway</span>
-        <span class="n">theory</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">97</span><span class="o">+</span><span class="mi">25</span><span class="p">))</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
-            <span class="n">theory</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">97</span><span class="o">+</span><span class="mi">25</span><span class="p">))</span>
-            
-        <span class="k">return</span> <span class="n">theory</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Hybrid</span><span class="p">(</span><span class="n">Observer</span><span class="p">,</span> <span class="n">Theorist</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fraction_theorist</span><span class="p">,</span> <span class="n">favorite_targets</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">favorite_targets</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fraction_theorist</span> <span class="o">=</span> <span class="n">fraction_theorist</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fraction_theorist</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_theory</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">target</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Used </span><span class="si">{}</span><span class="s1"> to prove theory </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Used </span><span class="si">{}</span><span class="s1"> to falsify theory </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">iva_momcheva</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">([</span><span class="s1">&#39;AEGIS&#39;</span><span class="p">,</span> <span class="s1">&#39;COSMOS&#39;</span><span class="p">,</span> <span class="s1">&#39;GOODS&#39;</span><span class="p">,</span> <span class="s1">&#39;UDS&#39;</span><span class="p">,</span> <span class="s1">&#39;Clg J0218.3-0510&#39;</span><span class="p">,</span> <span class="s1">&#39;assorted fancy lens clusters&#39;</span><span class="p">])</span>
-<span class="n">erik_tollerud</span> <span class="o">=</span> <span class="n">Hybrid</span><span class="p">(</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;an M31 satellite&#39;</span><span class="p">,</span> <span class="s1">&#39;a Milky Way satellite&#39;</span><span class="p">,</span> <span class="s1">&#39;an isolated LG Dwarf&#39;</span><span class="p">,</span> <span class="s1">&#39;a Local Volume Dwarf&#39;</span><span class="p">])</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">iva_momcheva</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-    <span class="n">erik_tollerud</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-    
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Erik&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">erik_tollerud</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Iva&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">iva_momcheva</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fritz_zwicky</span> <span class="o">=</span> <span class="n">Theorist</span><span class="p">()</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">):</span>
-    <span class="n">fritz_zwicky</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zwicky&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fritz_zwicky</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Other-resources/examples">Other resources/examples<a class="anchor-link" href="#Other-resources/examples">&#182;</a></h1><ul>
-<li>Some "business"-oriented example of object-oriented programming and interitance in Python:<ul>
-<li><a href="http://www.tutorialspoint.com/python/python_classes_objects.htm">http://www.tutorialspoint.com/python/python_classes_objects.htm</a></li>
-<li><a href="https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/">https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/</a></li>
-</ul>
-</li>
-<li>If you're into role-playing games: <a href="http://inventwithpython.com/blog/2014/12/02/why-is-object-oriented-programming-useful-with-an-role-playing-game-example/">http://inventwithpython.com/blog/2014/12/02/why-is-object-oriented-programming-useful-with-an-role-playing-game-example/</a></li>
-<li>The class heirarchy of <code>astropy.coordinates</code>: <a href="http://docs.astropy.org/en/stable/coordinates/index.html#class-inheritance-diagram">http://docs.astropy.org/en/stable/coordinates/index.html#class-inheritance-diagram</a>, and the documentation for how to make your own custom frames: <a href="http://docs.astropy.org/en/stable/coordinates/frames.html#defining-a-new-frame">http://docs.astropy.org/en/stable/coordinates/frames.html#defining-a-new-frame</a></li>
-</ul>
+<p>OK, so Cython gives a 2x speedup...</p>
 
 </div>
 </div>
@@ -12399,17 +12215,1864 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Now-some-ideas-to-play-around-with:">Now some ideas to play around with:<a class="anchor-link" href="#Now-some-ideas-to-play-around-with:">&#182;</a></h1><ul>
-<li>Extend the Point/Circle heirarchy to include Ellipse, or maybe Square (requires some knowledge of matplotlib)</li>
-<li>Extend the Astronomer heirarchy.  Maybe specific kinds of observers?</li>
-<li>Make your own "toy" class heirarchy from scratch.  Make sure to actually instantitate some objects and test that they work</li>
-<li>Chat with someone about or hack on a class heirarchy for some of your own data reduction/analysis code.</li>
-<li>Try more complicated multiple inheritance heirarchies, and try to infer how <code>super()</code> works (you'll probably have some surprises!).</li>
-<li>If you think you already understand classes and want to blow your mind: Experiment with metaclasses (E.g., <a href="https://docs.python.org/3/reference/datamodel.html#customizing-class-creation">https://docs.python.org/3/reference/datamodel.html#customizing-class-creation</a>)</li>
+<h1 id="How-can-we-do-better?">How can we do better?<a class="anchor-link" href="#How-can-we-do-better?">&#182;</a></h1><ul>
+<li><code>cython -a</code> is your friend.  It shows where cython produces a lot of python-related function calls, and is a hint that you can add C types to speed things up.  The "game" is to try to turn all the yellow to white in performance-sensitive parts.</li>
 </ul>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">-</span><span class="n">a</span>
+
+<span class="k">def</span> <span class="nf">fib_cy</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Fibonacci series up to n.&quot;&quot;&quot;</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<!DOCTYPE html>
+<!-- Generated by Cython 0.23.4 -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Cython: _cython_magic_22b8b43cd7c9ba617dc48be29183d5ba.pyx</title>
+    <style type="text/css">
+    
+body.cython { font-family: courier; font-size: 12; }
+
+.cython.tag  {  }
+.cython.line { margin: 0em }
+.cython.code { font-size: 9; color: #444444; display: none; margin: 0px 0px 0px 8px; border-left: 8px none; }
+
+.cython.line .run { background-color: #B0FFB0; }
+.cython.line .mis { background-color: #FFB0B0; }
+.cython.code.run  { border-left: 8px solid #B0FFB0; }
+.cython.code.mis  { border-left: 8px solid #FFB0B0; }
+
+.cython.code .py_c_api  { color: red; }
+.cython.code .py_macro_api  { color: #FF7000; }
+.cython.code .pyx_c_api  { color: #FF3000; }
+.cython.code .pyx_macro_api  { color: #FF7000; }
+.cython.code .refnanny  { color: #FFA000; }
+.cython.code .trace  { color: #FFA000; }
+.cython.code .error_goto  { color: #FFA000; }
+
+.cython.code .coerce  { color: #008000; border: 1px dotted #008000 }
+.cython.code .py_attr { color: #FF0000; font-weight: bold; }
+.cython.code .c_attr  { color: #0000FF; }
+.cython.code .py_call { color: #FF0000; font-weight: bold; }
+.cython.code .c_call  { color: #0000FF; }
+
+.cython.score-0 {background-color: #FFFFff;}
+.cython.score-1 {background-color: #FFFFe7;}
+.cython.score-2 {background-color: #FFFFd4;}
+.cython.score-3 {background-color: #FFFFc4;}
+.cython.score-4 {background-color: #FFFFb6;}
+.cython.score-5 {background-color: #FFFFaa;}
+.cython.score-6 {background-color: #FFFF9f;}
+.cython.score-7 {background-color: #FFFF96;}
+.cython.score-8 {background-color: #FFFF8d;}
+.cython.score-9 {background-color: #FFFF86;}
+.cython.score-10 {background-color: #FFFF7f;}
+.cython.score-11 {background-color: #FFFF79;}
+.cython.score-12 {background-color: #FFFF73;}
+.cython.score-13 {background-color: #FFFF6e;}
+.cython.score-14 {background-color: #FFFF6a;}
+.cython.score-15 {background-color: #FFFF66;}
+.cython.score-16 {background-color: #FFFF62;}
+.cython.score-17 {background-color: #FFFF5e;}
+.cython.score-18 {background-color: #FFFF5b;}
+.cython.score-19 {background-color: #FFFF57;}
+.cython.score-20 {background-color: #FFFF55;}
+.cython.score-21 {background-color: #FFFF52;}
+.cython.score-22 {background-color: #FFFF4f;}
+.cython.score-23 {background-color: #FFFF4d;}
+.cython.score-24 {background-color: #FFFF4b;}
+.cython.score-25 {background-color: #FFFF48;}
+.cython.score-26 {background-color: #FFFF46;}
+.cython.score-27 {background-color: #FFFF44;}
+.cython.score-28 {background-color: #FFFF43;}
+.cython.score-29 {background-color: #FFFF41;}
+.cython.score-30 {background-color: #FFFF3f;}
+.cython.score-31 {background-color: #FFFF3e;}
+.cython.score-32 {background-color: #FFFF3c;}
+.cython.score-33 {background-color: #FFFF3b;}
+.cython.score-34 {background-color: #FFFF39;}
+.cython.score-35 {background-color: #FFFF38;}
+.cython.score-36 {background-color: #FFFF37;}
+.cython.score-37 {background-color: #FFFF36;}
+.cython.score-38 {background-color: #FFFF35;}
+.cython.score-39 {background-color: #FFFF34;}
+.cython.score-40 {background-color: #FFFF33;}
+.cython.score-41 {background-color: #FFFF32;}
+.cython.score-42 {background-color: #FFFF31;}
+.cython.score-43 {background-color: #FFFF30;}
+.cython.score-44 {background-color: #FFFF2f;}
+.cython.score-45 {background-color: #FFFF2e;}
+.cython.score-46 {background-color: #FFFF2d;}
+.cython.score-47 {background-color: #FFFF2c;}
+.cython.score-48 {background-color: #FFFF2b;}
+.cython.score-49 {background-color: #FFFF2b;}
+.cython.score-50 {background-color: #FFFF2a;}
+.cython.score-51 {background-color: #FFFF29;}
+.cython.score-52 {background-color: #FFFF29;}
+.cython.score-53 {background-color: #FFFF28;}
+.cython.score-54 {background-color: #FFFF27;}
+.cython.score-55 {background-color: #FFFF27;}
+.cython.score-56 {background-color: #FFFF26;}
+.cython.score-57 {background-color: #FFFF26;}
+.cython.score-58 {background-color: #FFFF25;}
+.cython.score-59 {background-color: #FFFF24;}
+.cython.score-60 {background-color: #FFFF24;}
+.cython.score-61 {background-color: #FFFF23;}
+.cython.score-62 {background-color: #FFFF23;}
+.cython.score-63 {background-color: #FFFF22;}
+.cython.score-64 {background-color: #FFFF22;}
+.cython.score-65 {background-color: #FFFF22;}
+.cython.score-66 {background-color: #FFFF21;}
+.cython.score-67 {background-color: #FFFF21;}
+.cython.score-68 {background-color: #FFFF20;}
+.cython.score-69 {background-color: #FFFF20;}
+.cython.score-70 {background-color: #FFFF1f;}
+.cython.score-71 {background-color: #FFFF1f;}
+.cython.score-72 {background-color: #FFFF1f;}
+.cython.score-73 {background-color: #FFFF1e;}
+.cython.score-74 {background-color: #FFFF1e;}
+.cython.score-75 {background-color: #FFFF1e;}
+.cython.score-76 {background-color: #FFFF1d;}
+.cython.score-77 {background-color: #FFFF1d;}
+.cython.score-78 {background-color: #FFFF1c;}
+.cython.score-79 {background-color: #FFFF1c;}
+.cython.score-80 {background-color: #FFFF1c;}
+.cython.score-81 {background-color: #FFFF1c;}
+.cython.score-82 {background-color: #FFFF1b;}
+.cython.score-83 {background-color: #FFFF1b;}
+.cython.score-84 {background-color: #FFFF1b;}
+.cython.score-85 {background-color: #FFFF1a;}
+.cython.score-86 {background-color: #FFFF1a;}
+.cython.score-87 {background-color: #FFFF1a;}
+.cython.score-88 {background-color: #FFFF1a;}
+.cython.score-89 {background-color: #FFFF19;}
+.cython.score-90 {background-color: #FFFF19;}
+.cython.score-91 {background-color: #FFFF19;}
+.cython.score-92 {background-color: #FFFF19;}
+.cython.score-93 {background-color: #FFFF18;}
+.cython.score-94 {background-color: #FFFF18;}
+.cython.score-95 {background-color: #FFFF18;}
+.cython.score-96 {background-color: #FFFF18;}
+.cython.score-97 {background-color: #FFFF17;}
+.cython.score-98 {background-color: #FFFF17;}
+.cython.score-99 {background-color: #FFFF17;}
+.cython.score-100 {background-color: #FFFF17;}
+.cython.score-101 {background-color: #FFFF16;}
+.cython.score-102 {background-color: #FFFF16;}
+.cython.score-103 {background-color: #FFFF16;}
+.cython.score-104 {background-color: #FFFF16;}
+.cython.score-105 {background-color: #FFFF16;}
+.cython.score-106 {background-color: #FFFF15;}
+.cython.score-107 {background-color: #FFFF15;}
+.cython.score-108 {background-color: #FFFF15;}
+.cython.score-109 {background-color: #FFFF15;}
+.cython.score-110 {background-color: #FFFF15;}
+.cython.score-111 {background-color: #FFFF15;}
+.cython.score-112 {background-color: #FFFF14;}
+.cython.score-113 {background-color: #FFFF14;}
+.cython.score-114 {background-color: #FFFF14;}
+.cython.score-115 {background-color: #FFFF14;}
+.cython.score-116 {background-color: #FFFF14;}
+.cython.score-117 {background-color: #FFFF14;}
+.cython.score-118 {background-color: #FFFF13;}
+.cython.score-119 {background-color: #FFFF13;}
+.cython.score-120 {background-color: #FFFF13;}
+.cython.score-121 {background-color: #FFFF13;}
+.cython.score-122 {background-color: #FFFF13;}
+.cython.score-123 {background-color: #FFFF13;}
+.cython.score-124 {background-color: #FFFF13;}
+.cython.score-125 {background-color: #FFFF12;}
+.cython.score-126 {background-color: #FFFF12;}
+.cython.score-127 {background-color: #FFFF12;}
+.cython.score-128 {background-color: #FFFF12;}
+.cython.score-129 {background-color: #FFFF12;}
+.cython.score-130 {background-color: #FFFF12;}
+.cython.score-131 {background-color: #FFFF12;}
+.cython.score-132 {background-color: #FFFF11;}
+.cython.score-133 {background-color: #FFFF11;}
+.cython.score-134 {background-color: #FFFF11;}
+.cython.score-135 {background-color: #FFFF11;}
+.cython.score-136 {background-color: #FFFF11;}
+.cython.score-137 {background-color: #FFFF11;}
+.cython.score-138 {background-color: #FFFF11;}
+.cython.score-139 {background-color: #FFFF11;}
+.cython.score-140 {background-color: #FFFF11;}
+.cython.score-141 {background-color: #FFFF10;}
+.cython.score-142 {background-color: #FFFF10;}
+.cython.score-143 {background-color: #FFFF10;}
+.cython.score-144 {background-color: #FFFF10;}
+.cython.score-145 {background-color: #FFFF10;}
+.cython.score-146 {background-color: #FFFF10;}
+.cython.score-147 {background-color: #FFFF10;}
+.cython.score-148 {background-color: #FFFF10;}
+.cython.score-149 {background-color: #FFFF10;}
+.cython.score-150 {background-color: #FFFF0f;}
+.cython.score-151 {background-color: #FFFF0f;}
+.cython.score-152 {background-color: #FFFF0f;}
+.cython.score-153 {background-color: #FFFF0f;}
+.cython.score-154 {background-color: #FFFF0f;}
+.cython.score-155 {background-color: #FFFF0f;}
+.cython.score-156 {background-color: #FFFF0f;}
+.cython.score-157 {background-color: #FFFF0f;}
+.cython.score-158 {background-color: #FFFF0f;}
+.cython.score-159 {background-color: #FFFF0f;}
+.cython.score-160 {background-color: #FFFF0f;}
+.cython.score-161 {background-color: #FFFF0e;}
+.cython.score-162 {background-color: #FFFF0e;}
+.cython.score-163 {background-color: #FFFF0e;}
+.cython.score-164 {background-color: #FFFF0e;}
+.cython.score-165 {background-color: #FFFF0e;}
+.cython.score-166 {background-color: #FFFF0e;}
+.cython.score-167 {background-color: #FFFF0e;}
+.cython.score-168 {background-color: #FFFF0e;}
+.cython.score-169 {background-color: #FFFF0e;}
+.cython.score-170 {background-color: #FFFF0e;}
+.cython.score-171 {background-color: #FFFF0e;}
+.cython.score-172 {background-color: #FFFF0e;}
+.cython.score-173 {background-color: #FFFF0d;}
+.cython.score-174 {background-color: #FFFF0d;}
+.cython.score-175 {background-color: #FFFF0d;}
+.cython.score-176 {background-color: #FFFF0d;}
+.cython.score-177 {background-color: #FFFF0d;}
+.cython.score-178 {background-color: #FFFF0d;}
+.cython.score-179 {background-color: #FFFF0d;}
+.cython.score-180 {background-color: #FFFF0d;}
+.cython.score-181 {background-color: #FFFF0d;}
+.cython.score-182 {background-color: #FFFF0d;}
+.cython.score-183 {background-color: #FFFF0d;}
+.cython.score-184 {background-color: #FFFF0d;}
+.cython.score-185 {background-color: #FFFF0d;}
+.cython.score-186 {background-color: #FFFF0d;}
+.cython.score-187 {background-color: #FFFF0c;}
+.cython.score-188 {background-color: #FFFF0c;}
+.cython.score-189 {background-color: #FFFF0c;}
+.cython.score-190 {background-color: #FFFF0c;}
+.cython.score-191 {background-color: #FFFF0c;}
+.cython.score-192 {background-color: #FFFF0c;}
+.cython.score-193 {background-color: #FFFF0c;}
+.cython.score-194 {background-color: #FFFF0c;}
+.cython.score-195 {background-color: #FFFF0c;}
+.cython.score-196 {background-color: #FFFF0c;}
+.cython.score-197 {background-color: #FFFF0c;}
+.cython.score-198 {background-color: #FFFF0c;}
+.cython.score-199 {background-color: #FFFF0c;}
+.cython.score-200 {background-color: #FFFF0c;}
+.cython.score-201 {background-color: #FFFF0c;}
+.cython.score-202 {background-color: #FFFF0c;}
+.cython.score-203 {background-color: #FFFF0b;}
+.cython.score-204 {background-color: #FFFF0b;}
+.cython.score-205 {background-color: #FFFF0b;}
+.cython.score-206 {background-color: #FFFF0b;}
+.cython.score-207 {background-color: #FFFF0b;}
+.cython.score-208 {background-color: #FFFF0b;}
+.cython.score-209 {background-color: #FFFF0b;}
+.cython.score-210 {background-color: #FFFF0b;}
+.cython.score-211 {background-color: #FFFF0b;}
+.cython.score-212 {background-color: #FFFF0b;}
+.cython.score-213 {background-color: #FFFF0b;}
+.cython.score-214 {background-color: #FFFF0b;}
+.cython.score-215 {background-color: #FFFF0b;}
+.cython.score-216 {background-color: #FFFF0b;}
+.cython.score-217 {background-color: #FFFF0b;}
+.cython.score-218 {background-color: #FFFF0b;}
+.cython.score-219 {background-color: #FFFF0b;}
+.cython.score-220 {background-color: #FFFF0b;}
+.cython.score-221 {background-color: #FFFF0b;}
+.cython.score-222 {background-color: #FFFF0a;}
+.cython.score-223 {background-color: #FFFF0a;}
+.cython.score-224 {background-color: #FFFF0a;}
+.cython.score-225 {background-color: #FFFF0a;}
+.cython.score-226 {background-color: #FFFF0a;}
+.cython.score-227 {background-color: #FFFF0a;}
+.cython.score-228 {background-color: #FFFF0a;}
+.cython.score-229 {background-color: #FFFF0a;}
+.cython.score-230 {background-color: #FFFF0a;}
+.cython.score-231 {background-color: #FFFF0a;}
+.cython.score-232 {background-color: #FFFF0a;}
+.cython.score-233 {background-color: #FFFF0a;}
+.cython.score-234 {background-color: #FFFF0a;}
+.cython.score-235 {background-color: #FFFF0a;}
+.cython.score-236 {background-color: #FFFF0a;}
+.cython.score-237 {background-color: #FFFF0a;}
+.cython.score-238 {background-color: #FFFF0a;}
+.cython.score-239 {background-color: #FFFF0a;}
+.cython.score-240 {background-color: #FFFF0a;}
+.cython.score-241 {background-color: #FFFF0a;}
+.cython.score-242 {background-color: #FFFF0a;}
+.cython.score-243 {background-color: #FFFF0a;}
+.cython.score-244 {background-color: #FFFF0a;}
+.cython.score-245 {background-color: #FFFF0a;}
+.cython.score-246 {background-color: #FFFF09;}
+.cython.score-247 {background-color: #FFFF09;}
+.cython.score-248 {background-color: #FFFF09;}
+.cython.score-249 {background-color: #FFFF09;}
+.cython.score-250 {background-color: #FFFF09;}
+.cython.score-251 {background-color: #FFFF09;}
+.cython.score-252 {background-color: #FFFF09;}
+.cython.score-253 {background-color: #FFFF09;}
+.cython.score-254 {background-color: #FFFF09;}
+.cython .hll { background-color: #ffffcc }
+.cython  { background: #f8f8f8; }
+.cython .c { color: #408080; font-style: italic } /* Comment */
+.cython .err { border: 1px solid #FF0000 } /* Error */
+.cython .k { color: #008000; font-weight: bold } /* Keyword */
+.cython .o { color: #666666 } /* Operator */
+.cython .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.cython .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.cython .cp { color: #BC7A00 } /* Comment.Preproc */
+.cython .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.cython .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.cython .cs { color: #408080; font-style: italic } /* Comment.Special */
+.cython .gd { color: #A00000 } /* Generic.Deleted */
+.cython .ge { font-style: italic } /* Generic.Emph */
+.cython .gr { color: #FF0000 } /* Generic.Error */
+.cython .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.cython .gi { color: #00A000 } /* Generic.Inserted */
+.cython .go { color: #888888 } /* Generic.Output */
+.cython .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.cython .gs { font-weight: bold } /* Generic.Strong */
+.cython .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.cython .gt { color: #0044DD } /* Generic.Traceback */
+.cython .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.cython .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.cython .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.cython .kp { color: #008000 } /* Keyword.Pseudo */
+.cython .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.cython .kt { color: #B00040 } /* Keyword.Type */
+.cython .m { color: #666666 } /* Literal.Number */
+.cython .s { color: #BA2121 } /* Literal.String */
+.cython .na { color: #7D9029 } /* Name.Attribute */
+.cython .nb { color: #008000 } /* Name.Builtin */
+.cython .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.cython .no { color: #880000 } /* Name.Constant */
+.cython .nd { color: #AA22FF } /* Name.Decorator */
+.cython .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.cython .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.cython .nf { color: #0000FF } /* Name.Function */
+.cython .nl { color: #A0A000 } /* Name.Label */
+.cython .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.cython .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.cython .nv { color: #19177C } /* Name.Variable */
+.cython .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.cython .w { color: #bbbbbb } /* Text.Whitespace */
+.cython .mb { color: #666666 } /* Literal.Number.Bin */
+.cython .mf { color: #666666 } /* Literal.Number.Float */
+.cython .mh { color: #666666 } /* Literal.Number.Hex */
+.cython .mi { color: #666666 } /* Literal.Number.Integer */
+.cython .mo { color: #666666 } /* Literal.Number.Oct */
+.cython .sb { color: #BA2121 } /* Literal.String.Backtick */
+.cython .sc { color: #BA2121 } /* Literal.String.Char */
+.cython .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.cython .s2 { color: #BA2121 } /* Literal.String.Double */
+.cython .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.cython .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.cython .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.cython .sx { color: #008000 } /* Literal.String.Other */
+.cython .sr { color: #BB6688 } /* Literal.String.Regex */
+.cython .s1 { color: #BA2121 } /* Literal.String.Single */
+.cython .ss { color: #19177C } /* Literal.String.Symbol */
+.cython .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.cython .vc { color: #19177C } /* Name.Variable.Class */
+.cython .vg { color: #19177C } /* Name.Variable.Global */
+.cython .vi { color: #19177C } /* Name.Variable.Instance */
+.cython .il { color: #666666 } /* Literal.Number.Integer.Long */
+    </style>
+    <script>
+    function toggleDiv(id) {
+        theDiv = id.nextElementSibling
+        if (theDiv.style.display != 'block') theDiv.style.display = 'block';
+        else theDiv.style.display = 'none';
+    }
+    </script>
+</head>
+<body class="cython">
+<p><span style="border-bottom: solid 1px grey;">Generated by Cython 0.23.4</span></p>
+<p>
+    <span style="background-color: #FFFF00">Yellow lines</span> hint at Python interaction.<br />
+    Click on a line that starts with a "<code>+</code>" to see the C code that Cython generated for it.
+</p>
+<div class="cython"><pre class="cython line score-0">&#xA0;<span class="">1</span>: </pre>
+<pre class="cython line score-17" onclick='toggleDiv(this)'>+<span class="">2</span>: <span class="k">def</span> <span class="nf">fib_cy</span><span class="p">(</span><span class="n">n</span><span class="p">):</span></pre>
+<pre class='cython code score-17 '>/* Python wrapper */
+static PyObject *__pyx_pw_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_1fib_cy(PyObject *__pyx_self, PyObject *__pyx_v_n); /*proto*/
+static char __pyx_doc_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_fib_cy[] = "Compute the Fibonacci series up to n.";
+static PyMethodDef __pyx_mdef_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_1fib_cy = {"fib_cy", (PyCFunction)__pyx_pw_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_1fib_cy, METH_O, __pyx_doc_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_fib_cy};
+static PyObject *__pyx_pw_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_1fib_cy(PyObject *__pyx_self, PyObject *__pyx_v_n) {
+  PyObject *__pyx_r = 0;
+  <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("fib_cy (wrapper)", 0);
+  __pyx_r = __pyx_pf_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_fib_cy(__pyx_self, ((PyObject *)__pyx_v_n));
+
+  /* function exit code */
+  <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_fib_cy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n) {
+  PyObject *__pyx_v_a = NULL;
+  PyObject *__pyx_v_b = NULL;
+  PyObject *__pyx_r = NULL;
+  <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("fib_cy", 0);
+/* … */
+  /* function exit code */
+  __pyx_L1_error:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba.fib_cy", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_a);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_b);
+  <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
+  <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
+  return __pyx_r;
+}
+/* … */
+  __pyx_tuple_ = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_n_s_n, __pyx_n_s_a, __pyx_n_s_b);<span class='error_goto'> if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple_);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple_);
+/* … */
+  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_46_cython_magic_22b8b43cd7c9ba617dc48be29183d5ba_1fib_cy, NULL, __pyx_n_s_cython_magic_22b8b43cd7c9ba617d);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_fib_cy, __pyx_t_1) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">3</span>:     <span class="sd">&quot;&quot;&quot;Compute the Fibonacci series up to n.&quot;&quot;&quot;</span></pre>
+<pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">4</span>:     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span></pre>
+<pre class='cython code score-2 '>  __pyx_t_1 = __pyx_int_0;
+  <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_t_1);
+  __pyx_t_2 = __pyx_int_1;
+  <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_t_2);
+  __pyx_v_a = __pyx_t_1;
+  __pyx_t_1 = 0;
+  __pyx_v_b = __pyx_t_2;
+  __pyx_t_2 = 0;
+</pre><pre class="cython line score-8" onclick='toggleDiv(this)'>+<span class="">5</span>:     <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span></pre>
+<pre class='cython code score-8 '>  while (1) {
+    __pyx_t_2 = <span class='py_c_api'>PyObject_RichCompare</span>(__pyx_v_b, __pyx_v_n, Py_LT); <span class='refnanny'>__Pyx_XGOTREF</span>(__pyx_t_2);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(__pyx_t_2);<span class='error_goto'> if (unlikely(__pyx_t_3 &lt; 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
+    if (!__pyx_t_3) break;
+</pre><pre class="cython line score-8" onclick='toggleDiv(this)'>+<span class="">6</span>:         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span></pre>
+<pre class='cython code score-8 '>    __pyx_t_2 = __pyx_v_b;
+    <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_t_2);
+    __pyx_t_1 = <span class='py_c_api'>PyNumber_Add</span>(__pyx_v_a, __pyx_v_b);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+    <span class='pyx_macro_api'>__Pyx_DECREF_SET</span>(__pyx_v_a, __pyx_t_2);
+    __pyx_t_2 = 0;
+    <span class='pyx_macro_api'>__Pyx_DECREF_SET</span>(__pyx_v_b, __pyx_t_1);
+    __pyx_t_1 = 0;
+  }
+</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">7</span>:     <span class="k">return</span> <span class="n">b</span></pre>
+<pre class='cython code score-2 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+  <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_v_b);
+  __pyx_r = __pyx_v_b;
+  goto __pyx_L0;
+</pre></div></body></html>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looks like we spend a lot of time doing the "guts" of the work in the last one.  Can we add some C types where we know they should exist?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">-</span><span class="n">a</span>
+
+<span class="k">def</span> <span class="nf">fib_cy2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Fibonacci series up to n.&quot;&quot;&quot;</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">a</span><span class="p">,</span> <span class="nf">b</span>
+    
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<!DOCTYPE html>
+<!-- Generated by Cython 0.23.4 -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Cython: _cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27.pyx</title>
+    <style type="text/css">
+    
+body.cython { font-family: courier; font-size: 12; }
+
+.cython.tag  {  }
+.cython.line { margin: 0em }
+.cython.code { font-size: 9; color: #444444; display: none; margin: 0px 0px 0px 8px; border-left: 8px none; }
+
+.cython.line .run { background-color: #B0FFB0; }
+.cython.line .mis { background-color: #FFB0B0; }
+.cython.code.run  { border-left: 8px solid #B0FFB0; }
+.cython.code.mis  { border-left: 8px solid #FFB0B0; }
+
+.cython.code .py_c_api  { color: red; }
+.cython.code .py_macro_api  { color: #FF7000; }
+.cython.code .pyx_c_api  { color: #FF3000; }
+.cython.code .pyx_macro_api  { color: #FF7000; }
+.cython.code .refnanny  { color: #FFA000; }
+.cython.code .trace  { color: #FFA000; }
+.cython.code .error_goto  { color: #FFA000; }
+
+.cython.code .coerce  { color: #008000; border: 1px dotted #008000 }
+.cython.code .py_attr { color: #FF0000; font-weight: bold; }
+.cython.code .c_attr  { color: #0000FF; }
+.cython.code .py_call { color: #FF0000; font-weight: bold; }
+.cython.code .c_call  { color: #0000FF; }
+
+.cython.score-0 {background-color: #FFFFff;}
+.cython.score-1 {background-color: #FFFFe7;}
+.cython.score-2 {background-color: #FFFFd4;}
+.cython.score-3 {background-color: #FFFFc4;}
+.cython.score-4 {background-color: #FFFFb6;}
+.cython.score-5 {background-color: #FFFFaa;}
+.cython.score-6 {background-color: #FFFF9f;}
+.cython.score-7 {background-color: #FFFF96;}
+.cython.score-8 {background-color: #FFFF8d;}
+.cython.score-9 {background-color: #FFFF86;}
+.cython.score-10 {background-color: #FFFF7f;}
+.cython.score-11 {background-color: #FFFF79;}
+.cython.score-12 {background-color: #FFFF73;}
+.cython.score-13 {background-color: #FFFF6e;}
+.cython.score-14 {background-color: #FFFF6a;}
+.cython.score-15 {background-color: #FFFF66;}
+.cython.score-16 {background-color: #FFFF62;}
+.cython.score-17 {background-color: #FFFF5e;}
+.cython.score-18 {background-color: #FFFF5b;}
+.cython.score-19 {background-color: #FFFF57;}
+.cython.score-20 {background-color: #FFFF55;}
+.cython.score-21 {background-color: #FFFF52;}
+.cython.score-22 {background-color: #FFFF4f;}
+.cython.score-23 {background-color: #FFFF4d;}
+.cython.score-24 {background-color: #FFFF4b;}
+.cython.score-25 {background-color: #FFFF48;}
+.cython.score-26 {background-color: #FFFF46;}
+.cython.score-27 {background-color: #FFFF44;}
+.cython.score-28 {background-color: #FFFF43;}
+.cython.score-29 {background-color: #FFFF41;}
+.cython.score-30 {background-color: #FFFF3f;}
+.cython.score-31 {background-color: #FFFF3e;}
+.cython.score-32 {background-color: #FFFF3c;}
+.cython.score-33 {background-color: #FFFF3b;}
+.cython.score-34 {background-color: #FFFF39;}
+.cython.score-35 {background-color: #FFFF38;}
+.cython.score-36 {background-color: #FFFF37;}
+.cython.score-37 {background-color: #FFFF36;}
+.cython.score-38 {background-color: #FFFF35;}
+.cython.score-39 {background-color: #FFFF34;}
+.cython.score-40 {background-color: #FFFF33;}
+.cython.score-41 {background-color: #FFFF32;}
+.cython.score-42 {background-color: #FFFF31;}
+.cython.score-43 {background-color: #FFFF30;}
+.cython.score-44 {background-color: #FFFF2f;}
+.cython.score-45 {background-color: #FFFF2e;}
+.cython.score-46 {background-color: #FFFF2d;}
+.cython.score-47 {background-color: #FFFF2c;}
+.cython.score-48 {background-color: #FFFF2b;}
+.cython.score-49 {background-color: #FFFF2b;}
+.cython.score-50 {background-color: #FFFF2a;}
+.cython.score-51 {background-color: #FFFF29;}
+.cython.score-52 {background-color: #FFFF29;}
+.cython.score-53 {background-color: #FFFF28;}
+.cython.score-54 {background-color: #FFFF27;}
+.cython.score-55 {background-color: #FFFF27;}
+.cython.score-56 {background-color: #FFFF26;}
+.cython.score-57 {background-color: #FFFF26;}
+.cython.score-58 {background-color: #FFFF25;}
+.cython.score-59 {background-color: #FFFF24;}
+.cython.score-60 {background-color: #FFFF24;}
+.cython.score-61 {background-color: #FFFF23;}
+.cython.score-62 {background-color: #FFFF23;}
+.cython.score-63 {background-color: #FFFF22;}
+.cython.score-64 {background-color: #FFFF22;}
+.cython.score-65 {background-color: #FFFF22;}
+.cython.score-66 {background-color: #FFFF21;}
+.cython.score-67 {background-color: #FFFF21;}
+.cython.score-68 {background-color: #FFFF20;}
+.cython.score-69 {background-color: #FFFF20;}
+.cython.score-70 {background-color: #FFFF1f;}
+.cython.score-71 {background-color: #FFFF1f;}
+.cython.score-72 {background-color: #FFFF1f;}
+.cython.score-73 {background-color: #FFFF1e;}
+.cython.score-74 {background-color: #FFFF1e;}
+.cython.score-75 {background-color: #FFFF1e;}
+.cython.score-76 {background-color: #FFFF1d;}
+.cython.score-77 {background-color: #FFFF1d;}
+.cython.score-78 {background-color: #FFFF1c;}
+.cython.score-79 {background-color: #FFFF1c;}
+.cython.score-80 {background-color: #FFFF1c;}
+.cython.score-81 {background-color: #FFFF1c;}
+.cython.score-82 {background-color: #FFFF1b;}
+.cython.score-83 {background-color: #FFFF1b;}
+.cython.score-84 {background-color: #FFFF1b;}
+.cython.score-85 {background-color: #FFFF1a;}
+.cython.score-86 {background-color: #FFFF1a;}
+.cython.score-87 {background-color: #FFFF1a;}
+.cython.score-88 {background-color: #FFFF1a;}
+.cython.score-89 {background-color: #FFFF19;}
+.cython.score-90 {background-color: #FFFF19;}
+.cython.score-91 {background-color: #FFFF19;}
+.cython.score-92 {background-color: #FFFF19;}
+.cython.score-93 {background-color: #FFFF18;}
+.cython.score-94 {background-color: #FFFF18;}
+.cython.score-95 {background-color: #FFFF18;}
+.cython.score-96 {background-color: #FFFF18;}
+.cython.score-97 {background-color: #FFFF17;}
+.cython.score-98 {background-color: #FFFF17;}
+.cython.score-99 {background-color: #FFFF17;}
+.cython.score-100 {background-color: #FFFF17;}
+.cython.score-101 {background-color: #FFFF16;}
+.cython.score-102 {background-color: #FFFF16;}
+.cython.score-103 {background-color: #FFFF16;}
+.cython.score-104 {background-color: #FFFF16;}
+.cython.score-105 {background-color: #FFFF16;}
+.cython.score-106 {background-color: #FFFF15;}
+.cython.score-107 {background-color: #FFFF15;}
+.cython.score-108 {background-color: #FFFF15;}
+.cython.score-109 {background-color: #FFFF15;}
+.cython.score-110 {background-color: #FFFF15;}
+.cython.score-111 {background-color: #FFFF15;}
+.cython.score-112 {background-color: #FFFF14;}
+.cython.score-113 {background-color: #FFFF14;}
+.cython.score-114 {background-color: #FFFF14;}
+.cython.score-115 {background-color: #FFFF14;}
+.cython.score-116 {background-color: #FFFF14;}
+.cython.score-117 {background-color: #FFFF14;}
+.cython.score-118 {background-color: #FFFF13;}
+.cython.score-119 {background-color: #FFFF13;}
+.cython.score-120 {background-color: #FFFF13;}
+.cython.score-121 {background-color: #FFFF13;}
+.cython.score-122 {background-color: #FFFF13;}
+.cython.score-123 {background-color: #FFFF13;}
+.cython.score-124 {background-color: #FFFF13;}
+.cython.score-125 {background-color: #FFFF12;}
+.cython.score-126 {background-color: #FFFF12;}
+.cython.score-127 {background-color: #FFFF12;}
+.cython.score-128 {background-color: #FFFF12;}
+.cython.score-129 {background-color: #FFFF12;}
+.cython.score-130 {background-color: #FFFF12;}
+.cython.score-131 {background-color: #FFFF12;}
+.cython.score-132 {background-color: #FFFF11;}
+.cython.score-133 {background-color: #FFFF11;}
+.cython.score-134 {background-color: #FFFF11;}
+.cython.score-135 {background-color: #FFFF11;}
+.cython.score-136 {background-color: #FFFF11;}
+.cython.score-137 {background-color: #FFFF11;}
+.cython.score-138 {background-color: #FFFF11;}
+.cython.score-139 {background-color: #FFFF11;}
+.cython.score-140 {background-color: #FFFF11;}
+.cython.score-141 {background-color: #FFFF10;}
+.cython.score-142 {background-color: #FFFF10;}
+.cython.score-143 {background-color: #FFFF10;}
+.cython.score-144 {background-color: #FFFF10;}
+.cython.score-145 {background-color: #FFFF10;}
+.cython.score-146 {background-color: #FFFF10;}
+.cython.score-147 {background-color: #FFFF10;}
+.cython.score-148 {background-color: #FFFF10;}
+.cython.score-149 {background-color: #FFFF10;}
+.cython.score-150 {background-color: #FFFF0f;}
+.cython.score-151 {background-color: #FFFF0f;}
+.cython.score-152 {background-color: #FFFF0f;}
+.cython.score-153 {background-color: #FFFF0f;}
+.cython.score-154 {background-color: #FFFF0f;}
+.cython.score-155 {background-color: #FFFF0f;}
+.cython.score-156 {background-color: #FFFF0f;}
+.cython.score-157 {background-color: #FFFF0f;}
+.cython.score-158 {background-color: #FFFF0f;}
+.cython.score-159 {background-color: #FFFF0f;}
+.cython.score-160 {background-color: #FFFF0f;}
+.cython.score-161 {background-color: #FFFF0e;}
+.cython.score-162 {background-color: #FFFF0e;}
+.cython.score-163 {background-color: #FFFF0e;}
+.cython.score-164 {background-color: #FFFF0e;}
+.cython.score-165 {background-color: #FFFF0e;}
+.cython.score-166 {background-color: #FFFF0e;}
+.cython.score-167 {background-color: #FFFF0e;}
+.cython.score-168 {background-color: #FFFF0e;}
+.cython.score-169 {background-color: #FFFF0e;}
+.cython.score-170 {background-color: #FFFF0e;}
+.cython.score-171 {background-color: #FFFF0e;}
+.cython.score-172 {background-color: #FFFF0e;}
+.cython.score-173 {background-color: #FFFF0d;}
+.cython.score-174 {background-color: #FFFF0d;}
+.cython.score-175 {background-color: #FFFF0d;}
+.cython.score-176 {background-color: #FFFF0d;}
+.cython.score-177 {background-color: #FFFF0d;}
+.cython.score-178 {background-color: #FFFF0d;}
+.cython.score-179 {background-color: #FFFF0d;}
+.cython.score-180 {background-color: #FFFF0d;}
+.cython.score-181 {background-color: #FFFF0d;}
+.cython.score-182 {background-color: #FFFF0d;}
+.cython.score-183 {background-color: #FFFF0d;}
+.cython.score-184 {background-color: #FFFF0d;}
+.cython.score-185 {background-color: #FFFF0d;}
+.cython.score-186 {background-color: #FFFF0d;}
+.cython.score-187 {background-color: #FFFF0c;}
+.cython.score-188 {background-color: #FFFF0c;}
+.cython.score-189 {background-color: #FFFF0c;}
+.cython.score-190 {background-color: #FFFF0c;}
+.cython.score-191 {background-color: #FFFF0c;}
+.cython.score-192 {background-color: #FFFF0c;}
+.cython.score-193 {background-color: #FFFF0c;}
+.cython.score-194 {background-color: #FFFF0c;}
+.cython.score-195 {background-color: #FFFF0c;}
+.cython.score-196 {background-color: #FFFF0c;}
+.cython.score-197 {background-color: #FFFF0c;}
+.cython.score-198 {background-color: #FFFF0c;}
+.cython.score-199 {background-color: #FFFF0c;}
+.cython.score-200 {background-color: #FFFF0c;}
+.cython.score-201 {background-color: #FFFF0c;}
+.cython.score-202 {background-color: #FFFF0c;}
+.cython.score-203 {background-color: #FFFF0b;}
+.cython.score-204 {background-color: #FFFF0b;}
+.cython.score-205 {background-color: #FFFF0b;}
+.cython.score-206 {background-color: #FFFF0b;}
+.cython.score-207 {background-color: #FFFF0b;}
+.cython.score-208 {background-color: #FFFF0b;}
+.cython.score-209 {background-color: #FFFF0b;}
+.cython.score-210 {background-color: #FFFF0b;}
+.cython.score-211 {background-color: #FFFF0b;}
+.cython.score-212 {background-color: #FFFF0b;}
+.cython.score-213 {background-color: #FFFF0b;}
+.cython.score-214 {background-color: #FFFF0b;}
+.cython.score-215 {background-color: #FFFF0b;}
+.cython.score-216 {background-color: #FFFF0b;}
+.cython.score-217 {background-color: #FFFF0b;}
+.cython.score-218 {background-color: #FFFF0b;}
+.cython.score-219 {background-color: #FFFF0b;}
+.cython.score-220 {background-color: #FFFF0b;}
+.cython.score-221 {background-color: #FFFF0b;}
+.cython.score-222 {background-color: #FFFF0a;}
+.cython.score-223 {background-color: #FFFF0a;}
+.cython.score-224 {background-color: #FFFF0a;}
+.cython.score-225 {background-color: #FFFF0a;}
+.cython.score-226 {background-color: #FFFF0a;}
+.cython.score-227 {background-color: #FFFF0a;}
+.cython.score-228 {background-color: #FFFF0a;}
+.cython.score-229 {background-color: #FFFF0a;}
+.cython.score-230 {background-color: #FFFF0a;}
+.cython.score-231 {background-color: #FFFF0a;}
+.cython.score-232 {background-color: #FFFF0a;}
+.cython.score-233 {background-color: #FFFF0a;}
+.cython.score-234 {background-color: #FFFF0a;}
+.cython.score-235 {background-color: #FFFF0a;}
+.cython.score-236 {background-color: #FFFF0a;}
+.cython.score-237 {background-color: #FFFF0a;}
+.cython.score-238 {background-color: #FFFF0a;}
+.cython.score-239 {background-color: #FFFF0a;}
+.cython.score-240 {background-color: #FFFF0a;}
+.cython.score-241 {background-color: #FFFF0a;}
+.cython.score-242 {background-color: #FFFF0a;}
+.cython.score-243 {background-color: #FFFF0a;}
+.cython.score-244 {background-color: #FFFF0a;}
+.cython.score-245 {background-color: #FFFF0a;}
+.cython.score-246 {background-color: #FFFF09;}
+.cython.score-247 {background-color: #FFFF09;}
+.cython.score-248 {background-color: #FFFF09;}
+.cython.score-249 {background-color: #FFFF09;}
+.cython.score-250 {background-color: #FFFF09;}
+.cython.score-251 {background-color: #FFFF09;}
+.cython.score-252 {background-color: #FFFF09;}
+.cython.score-253 {background-color: #FFFF09;}
+.cython.score-254 {background-color: #FFFF09;}
+.cython .hll { background-color: #ffffcc }
+.cython  { background: #f8f8f8; }
+.cython .c { color: #408080; font-style: italic } /* Comment */
+.cython .err { border: 1px solid #FF0000 } /* Error */
+.cython .k { color: #008000; font-weight: bold } /* Keyword */
+.cython .o { color: #666666 } /* Operator */
+.cython .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.cython .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.cython .cp { color: #BC7A00 } /* Comment.Preproc */
+.cython .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.cython .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.cython .cs { color: #408080; font-style: italic } /* Comment.Special */
+.cython .gd { color: #A00000 } /* Generic.Deleted */
+.cython .ge { font-style: italic } /* Generic.Emph */
+.cython .gr { color: #FF0000 } /* Generic.Error */
+.cython .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.cython .gi { color: #00A000 } /* Generic.Inserted */
+.cython .go { color: #888888 } /* Generic.Output */
+.cython .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.cython .gs { font-weight: bold } /* Generic.Strong */
+.cython .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.cython .gt { color: #0044DD } /* Generic.Traceback */
+.cython .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.cython .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.cython .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.cython .kp { color: #008000 } /* Keyword.Pseudo */
+.cython .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.cython .kt { color: #B00040 } /* Keyword.Type */
+.cython .m { color: #666666 } /* Literal.Number */
+.cython .s { color: #BA2121 } /* Literal.String */
+.cython .na { color: #7D9029 } /* Name.Attribute */
+.cython .nb { color: #008000 } /* Name.Builtin */
+.cython .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.cython .no { color: #880000 } /* Name.Constant */
+.cython .nd { color: #AA22FF } /* Name.Decorator */
+.cython .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.cython .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.cython .nf { color: #0000FF } /* Name.Function */
+.cython .nl { color: #A0A000 } /* Name.Label */
+.cython .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.cython .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.cython .nv { color: #19177C } /* Name.Variable */
+.cython .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.cython .w { color: #bbbbbb } /* Text.Whitespace */
+.cython .mb { color: #666666 } /* Literal.Number.Bin */
+.cython .mf { color: #666666 } /* Literal.Number.Float */
+.cython .mh { color: #666666 } /* Literal.Number.Hex */
+.cython .mi { color: #666666 } /* Literal.Number.Integer */
+.cython .mo { color: #666666 } /* Literal.Number.Oct */
+.cython .sb { color: #BA2121 } /* Literal.String.Backtick */
+.cython .sc { color: #BA2121 } /* Literal.String.Char */
+.cython .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.cython .s2 { color: #BA2121 } /* Literal.String.Double */
+.cython .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.cython .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.cython .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.cython .sx { color: #008000 } /* Literal.String.Other */
+.cython .sr { color: #BB6688 } /* Literal.String.Regex */
+.cython .s1 { color: #BA2121 } /* Literal.String.Single */
+.cython .ss { color: #19177C } /* Literal.String.Symbol */
+.cython .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.cython .vc { color: #19177C } /* Name.Variable.Class */
+.cython .vg { color: #19177C } /* Name.Variable.Global */
+.cython .vi { color: #19177C } /* Name.Variable.Instance */
+.cython .il { color: #666666 } /* Literal.Number.Integer.Long */
+    </style>
+    <script>
+    function toggleDiv(id) {
+        theDiv = id.nextElementSibling
+        if (theDiv.style.display != 'block') theDiv.style.display = 'block';
+        else theDiv.style.display = 'none';
+    }
+    </script>
+</head>
+<body class="cython">
+<p><span style="border-bottom: solid 1px grey;">Generated by Cython 0.23.4</span></p>
+<p>
+    <span style="background-color: #FFFF00">Yellow lines</span> hint at Python interaction.<br />
+    Click on a line that starts with a "<code>+</code>" to see the C code that Cython generated for it.
+</p>
+<div class="cython"><pre class="cython line score-0">&#xA0;<span class="">1</span>: </pre>
+<pre class="cython line score-15" onclick='toggleDiv(this)'>+<span class="">2</span>: <span class="k">def</span> <span class="nf">fib_cy2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span></pre>
+<pre class='cython code score-15 '>/* Python wrapper */
+static PyObject *__pyx_pw_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_1fib_cy2(PyObject *__pyx_self, PyObject *__pyx_v_n); /*proto*/
+static char __pyx_doc_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_fib_cy2[] = "Compute the Fibonacci series up to n.";
+static PyMethodDef __pyx_mdef_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_1fib_cy2 = {"fib_cy2", (PyCFunction)__pyx_pw_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_1fib_cy2, METH_O, __pyx_doc_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_fib_cy2};
+static PyObject *__pyx_pw_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_1fib_cy2(PyObject *__pyx_self, PyObject *__pyx_v_n) {
+  PyObject *__pyx_r = 0;
+  <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("fib_cy2 (wrapper)", 0);
+  __pyx_r = __pyx_pf_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_fib_cy2(__pyx_self, ((PyObject *)__pyx_v_n));
+
+  /* function exit code */
+  <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_fib_cy2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n) {
+  int __pyx_v_a;
+  int __pyx_v_b;
+  PyObject *__pyx_r = NULL;
+  <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("fib_cy2", 0);
+/* … */
+  /* function exit code */
+  __pyx_L1_error:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_3);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_4);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27.fib_cy2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
+  <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
+  return __pyx_r;
+}
+/* … */
+  __pyx_tuple_ = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_n_s_n, __pyx_n_s_a, __pyx_n_s_b);<span class='error_goto'> if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple_);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple_);
+/* … */
+  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_46_cython_magic_6fb1cbaec6ed5cb545ad1a6b1595db27_1fib_cy2, NULL, __pyx_n_s_cython_magic_6fb1cbaec6ed5cb545);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_fib_cy2, __pyx_t_1) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">3</span>:     <span class="sd">&quot;&quot;&quot;Compute the Fibonacci series up to n.&quot;&quot;&quot;</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">4</span>:     <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">a</span><span class="p">,</span> <span class="nf">b</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">5</span>: </pre>
+<pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">6</span>:     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span></pre>
+<pre class='cython code score-0 '>  __pyx_t_1 = 0;
+  __pyx_t_2 = 1;
+  __pyx_v_a = __pyx_t_1;
+  __pyx_v_b = __pyx_t_2;
+</pre><pre class="cython line score-11" onclick='toggleDiv(this)'>+<span class="">7</span>:     <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span></pre>
+<pre class='cython code score-11 '>  while (1) {
+    __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyInt_From_int</span>(__pyx_v_b);<span class='error_goto'> if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
+    __pyx_t_4 = <span class='py_c_api'>PyObject_RichCompare</span>(__pyx_t_3, __pyx_v_n, Py_LT); <span class='refnanny'>__Pyx_XGOTREF</span>(__pyx_t_4);<span class='error_goto'> if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_5 = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(__pyx_t_4);<span class='error_goto'> if (unlikely(__pyx_t_5 &lt; 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_4); __pyx_t_4 = 0;
+    if (!__pyx_t_5) break;
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">8</span>:         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span></pre>
+<pre class='cython code score-0 '>    __pyx_t_2 = __pyx_v_b;
+    __pyx_t_1 = (__pyx_v_a + __pyx_v_b);
+    __pyx_v_a = __pyx_t_2;
+    __pyx_v_b = __pyx_t_1;
+  }
+</pre><pre class="cython line score-3" onclick='toggleDiv(this)'>+<span class="">9</span>:     <span class="k">return</span> <span class="n">b</span></pre>
+<pre class='cython code score-3 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+  __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyInt_From_int</span>(__pyx_v_b);<span class='error_goto'> if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_4);
+  __pyx_r = __pyx_t_4;
+  __pyx_t_4 = 0;
+  goto __pyx_L0;
+</pre></div></body></html>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Still spending some time dealing with the <code>n</code>, as it's a python integer.  lets cast it in advance before the inner loop.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">-</span><span class="n">a</span>
+
+<span class="k">def</span> <span class="nf">fib_cy3</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Fibonacci series up to n.&quot;&quot;&quot;</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">a</span> <span class="o">=</span> <span class="mf">0</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">b</span> <span class="o">=</span> <span class="mf">1</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">c_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">c_n</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<!DOCTYPE html>
+<!-- Generated by Cython 0.23.4 -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Cython: _cython_magic_b2ecfce6889f340454f93e2264899042.pyx</title>
+    <style type="text/css">
+    
+body.cython { font-family: courier; font-size: 12; }
+
+.cython.tag  {  }
+.cython.line { margin: 0em }
+.cython.code { font-size: 9; color: #444444; display: none; margin: 0px 0px 0px 8px; border-left: 8px none; }
+
+.cython.line .run { background-color: #B0FFB0; }
+.cython.line .mis { background-color: #FFB0B0; }
+.cython.code.run  { border-left: 8px solid #B0FFB0; }
+.cython.code.mis  { border-left: 8px solid #FFB0B0; }
+
+.cython.code .py_c_api  { color: red; }
+.cython.code .py_macro_api  { color: #FF7000; }
+.cython.code .pyx_c_api  { color: #FF3000; }
+.cython.code .pyx_macro_api  { color: #FF7000; }
+.cython.code .refnanny  { color: #FFA000; }
+.cython.code .trace  { color: #FFA000; }
+.cython.code .error_goto  { color: #FFA000; }
+
+.cython.code .coerce  { color: #008000; border: 1px dotted #008000 }
+.cython.code .py_attr { color: #FF0000; font-weight: bold; }
+.cython.code .c_attr  { color: #0000FF; }
+.cython.code .py_call { color: #FF0000; font-weight: bold; }
+.cython.code .c_call  { color: #0000FF; }
+
+.cython.score-0 {background-color: #FFFFff;}
+.cython.score-1 {background-color: #FFFFe7;}
+.cython.score-2 {background-color: #FFFFd4;}
+.cython.score-3 {background-color: #FFFFc4;}
+.cython.score-4 {background-color: #FFFFb6;}
+.cython.score-5 {background-color: #FFFFaa;}
+.cython.score-6 {background-color: #FFFF9f;}
+.cython.score-7 {background-color: #FFFF96;}
+.cython.score-8 {background-color: #FFFF8d;}
+.cython.score-9 {background-color: #FFFF86;}
+.cython.score-10 {background-color: #FFFF7f;}
+.cython.score-11 {background-color: #FFFF79;}
+.cython.score-12 {background-color: #FFFF73;}
+.cython.score-13 {background-color: #FFFF6e;}
+.cython.score-14 {background-color: #FFFF6a;}
+.cython.score-15 {background-color: #FFFF66;}
+.cython.score-16 {background-color: #FFFF62;}
+.cython.score-17 {background-color: #FFFF5e;}
+.cython.score-18 {background-color: #FFFF5b;}
+.cython.score-19 {background-color: #FFFF57;}
+.cython.score-20 {background-color: #FFFF55;}
+.cython.score-21 {background-color: #FFFF52;}
+.cython.score-22 {background-color: #FFFF4f;}
+.cython.score-23 {background-color: #FFFF4d;}
+.cython.score-24 {background-color: #FFFF4b;}
+.cython.score-25 {background-color: #FFFF48;}
+.cython.score-26 {background-color: #FFFF46;}
+.cython.score-27 {background-color: #FFFF44;}
+.cython.score-28 {background-color: #FFFF43;}
+.cython.score-29 {background-color: #FFFF41;}
+.cython.score-30 {background-color: #FFFF3f;}
+.cython.score-31 {background-color: #FFFF3e;}
+.cython.score-32 {background-color: #FFFF3c;}
+.cython.score-33 {background-color: #FFFF3b;}
+.cython.score-34 {background-color: #FFFF39;}
+.cython.score-35 {background-color: #FFFF38;}
+.cython.score-36 {background-color: #FFFF37;}
+.cython.score-37 {background-color: #FFFF36;}
+.cython.score-38 {background-color: #FFFF35;}
+.cython.score-39 {background-color: #FFFF34;}
+.cython.score-40 {background-color: #FFFF33;}
+.cython.score-41 {background-color: #FFFF32;}
+.cython.score-42 {background-color: #FFFF31;}
+.cython.score-43 {background-color: #FFFF30;}
+.cython.score-44 {background-color: #FFFF2f;}
+.cython.score-45 {background-color: #FFFF2e;}
+.cython.score-46 {background-color: #FFFF2d;}
+.cython.score-47 {background-color: #FFFF2c;}
+.cython.score-48 {background-color: #FFFF2b;}
+.cython.score-49 {background-color: #FFFF2b;}
+.cython.score-50 {background-color: #FFFF2a;}
+.cython.score-51 {background-color: #FFFF29;}
+.cython.score-52 {background-color: #FFFF29;}
+.cython.score-53 {background-color: #FFFF28;}
+.cython.score-54 {background-color: #FFFF27;}
+.cython.score-55 {background-color: #FFFF27;}
+.cython.score-56 {background-color: #FFFF26;}
+.cython.score-57 {background-color: #FFFF26;}
+.cython.score-58 {background-color: #FFFF25;}
+.cython.score-59 {background-color: #FFFF24;}
+.cython.score-60 {background-color: #FFFF24;}
+.cython.score-61 {background-color: #FFFF23;}
+.cython.score-62 {background-color: #FFFF23;}
+.cython.score-63 {background-color: #FFFF22;}
+.cython.score-64 {background-color: #FFFF22;}
+.cython.score-65 {background-color: #FFFF22;}
+.cython.score-66 {background-color: #FFFF21;}
+.cython.score-67 {background-color: #FFFF21;}
+.cython.score-68 {background-color: #FFFF20;}
+.cython.score-69 {background-color: #FFFF20;}
+.cython.score-70 {background-color: #FFFF1f;}
+.cython.score-71 {background-color: #FFFF1f;}
+.cython.score-72 {background-color: #FFFF1f;}
+.cython.score-73 {background-color: #FFFF1e;}
+.cython.score-74 {background-color: #FFFF1e;}
+.cython.score-75 {background-color: #FFFF1e;}
+.cython.score-76 {background-color: #FFFF1d;}
+.cython.score-77 {background-color: #FFFF1d;}
+.cython.score-78 {background-color: #FFFF1c;}
+.cython.score-79 {background-color: #FFFF1c;}
+.cython.score-80 {background-color: #FFFF1c;}
+.cython.score-81 {background-color: #FFFF1c;}
+.cython.score-82 {background-color: #FFFF1b;}
+.cython.score-83 {background-color: #FFFF1b;}
+.cython.score-84 {background-color: #FFFF1b;}
+.cython.score-85 {background-color: #FFFF1a;}
+.cython.score-86 {background-color: #FFFF1a;}
+.cython.score-87 {background-color: #FFFF1a;}
+.cython.score-88 {background-color: #FFFF1a;}
+.cython.score-89 {background-color: #FFFF19;}
+.cython.score-90 {background-color: #FFFF19;}
+.cython.score-91 {background-color: #FFFF19;}
+.cython.score-92 {background-color: #FFFF19;}
+.cython.score-93 {background-color: #FFFF18;}
+.cython.score-94 {background-color: #FFFF18;}
+.cython.score-95 {background-color: #FFFF18;}
+.cython.score-96 {background-color: #FFFF18;}
+.cython.score-97 {background-color: #FFFF17;}
+.cython.score-98 {background-color: #FFFF17;}
+.cython.score-99 {background-color: #FFFF17;}
+.cython.score-100 {background-color: #FFFF17;}
+.cython.score-101 {background-color: #FFFF16;}
+.cython.score-102 {background-color: #FFFF16;}
+.cython.score-103 {background-color: #FFFF16;}
+.cython.score-104 {background-color: #FFFF16;}
+.cython.score-105 {background-color: #FFFF16;}
+.cython.score-106 {background-color: #FFFF15;}
+.cython.score-107 {background-color: #FFFF15;}
+.cython.score-108 {background-color: #FFFF15;}
+.cython.score-109 {background-color: #FFFF15;}
+.cython.score-110 {background-color: #FFFF15;}
+.cython.score-111 {background-color: #FFFF15;}
+.cython.score-112 {background-color: #FFFF14;}
+.cython.score-113 {background-color: #FFFF14;}
+.cython.score-114 {background-color: #FFFF14;}
+.cython.score-115 {background-color: #FFFF14;}
+.cython.score-116 {background-color: #FFFF14;}
+.cython.score-117 {background-color: #FFFF14;}
+.cython.score-118 {background-color: #FFFF13;}
+.cython.score-119 {background-color: #FFFF13;}
+.cython.score-120 {background-color: #FFFF13;}
+.cython.score-121 {background-color: #FFFF13;}
+.cython.score-122 {background-color: #FFFF13;}
+.cython.score-123 {background-color: #FFFF13;}
+.cython.score-124 {background-color: #FFFF13;}
+.cython.score-125 {background-color: #FFFF12;}
+.cython.score-126 {background-color: #FFFF12;}
+.cython.score-127 {background-color: #FFFF12;}
+.cython.score-128 {background-color: #FFFF12;}
+.cython.score-129 {background-color: #FFFF12;}
+.cython.score-130 {background-color: #FFFF12;}
+.cython.score-131 {background-color: #FFFF12;}
+.cython.score-132 {background-color: #FFFF11;}
+.cython.score-133 {background-color: #FFFF11;}
+.cython.score-134 {background-color: #FFFF11;}
+.cython.score-135 {background-color: #FFFF11;}
+.cython.score-136 {background-color: #FFFF11;}
+.cython.score-137 {background-color: #FFFF11;}
+.cython.score-138 {background-color: #FFFF11;}
+.cython.score-139 {background-color: #FFFF11;}
+.cython.score-140 {background-color: #FFFF11;}
+.cython.score-141 {background-color: #FFFF10;}
+.cython.score-142 {background-color: #FFFF10;}
+.cython.score-143 {background-color: #FFFF10;}
+.cython.score-144 {background-color: #FFFF10;}
+.cython.score-145 {background-color: #FFFF10;}
+.cython.score-146 {background-color: #FFFF10;}
+.cython.score-147 {background-color: #FFFF10;}
+.cython.score-148 {background-color: #FFFF10;}
+.cython.score-149 {background-color: #FFFF10;}
+.cython.score-150 {background-color: #FFFF0f;}
+.cython.score-151 {background-color: #FFFF0f;}
+.cython.score-152 {background-color: #FFFF0f;}
+.cython.score-153 {background-color: #FFFF0f;}
+.cython.score-154 {background-color: #FFFF0f;}
+.cython.score-155 {background-color: #FFFF0f;}
+.cython.score-156 {background-color: #FFFF0f;}
+.cython.score-157 {background-color: #FFFF0f;}
+.cython.score-158 {background-color: #FFFF0f;}
+.cython.score-159 {background-color: #FFFF0f;}
+.cython.score-160 {background-color: #FFFF0f;}
+.cython.score-161 {background-color: #FFFF0e;}
+.cython.score-162 {background-color: #FFFF0e;}
+.cython.score-163 {background-color: #FFFF0e;}
+.cython.score-164 {background-color: #FFFF0e;}
+.cython.score-165 {background-color: #FFFF0e;}
+.cython.score-166 {background-color: #FFFF0e;}
+.cython.score-167 {background-color: #FFFF0e;}
+.cython.score-168 {background-color: #FFFF0e;}
+.cython.score-169 {background-color: #FFFF0e;}
+.cython.score-170 {background-color: #FFFF0e;}
+.cython.score-171 {background-color: #FFFF0e;}
+.cython.score-172 {background-color: #FFFF0e;}
+.cython.score-173 {background-color: #FFFF0d;}
+.cython.score-174 {background-color: #FFFF0d;}
+.cython.score-175 {background-color: #FFFF0d;}
+.cython.score-176 {background-color: #FFFF0d;}
+.cython.score-177 {background-color: #FFFF0d;}
+.cython.score-178 {background-color: #FFFF0d;}
+.cython.score-179 {background-color: #FFFF0d;}
+.cython.score-180 {background-color: #FFFF0d;}
+.cython.score-181 {background-color: #FFFF0d;}
+.cython.score-182 {background-color: #FFFF0d;}
+.cython.score-183 {background-color: #FFFF0d;}
+.cython.score-184 {background-color: #FFFF0d;}
+.cython.score-185 {background-color: #FFFF0d;}
+.cython.score-186 {background-color: #FFFF0d;}
+.cython.score-187 {background-color: #FFFF0c;}
+.cython.score-188 {background-color: #FFFF0c;}
+.cython.score-189 {background-color: #FFFF0c;}
+.cython.score-190 {background-color: #FFFF0c;}
+.cython.score-191 {background-color: #FFFF0c;}
+.cython.score-192 {background-color: #FFFF0c;}
+.cython.score-193 {background-color: #FFFF0c;}
+.cython.score-194 {background-color: #FFFF0c;}
+.cython.score-195 {background-color: #FFFF0c;}
+.cython.score-196 {background-color: #FFFF0c;}
+.cython.score-197 {background-color: #FFFF0c;}
+.cython.score-198 {background-color: #FFFF0c;}
+.cython.score-199 {background-color: #FFFF0c;}
+.cython.score-200 {background-color: #FFFF0c;}
+.cython.score-201 {background-color: #FFFF0c;}
+.cython.score-202 {background-color: #FFFF0c;}
+.cython.score-203 {background-color: #FFFF0b;}
+.cython.score-204 {background-color: #FFFF0b;}
+.cython.score-205 {background-color: #FFFF0b;}
+.cython.score-206 {background-color: #FFFF0b;}
+.cython.score-207 {background-color: #FFFF0b;}
+.cython.score-208 {background-color: #FFFF0b;}
+.cython.score-209 {background-color: #FFFF0b;}
+.cython.score-210 {background-color: #FFFF0b;}
+.cython.score-211 {background-color: #FFFF0b;}
+.cython.score-212 {background-color: #FFFF0b;}
+.cython.score-213 {background-color: #FFFF0b;}
+.cython.score-214 {background-color: #FFFF0b;}
+.cython.score-215 {background-color: #FFFF0b;}
+.cython.score-216 {background-color: #FFFF0b;}
+.cython.score-217 {background-color: #FFFF0b;}
+.cython.score-218 {background-color: #FFFF0b;}
+.cython.score-219 {background-color: #FFFF0b;}
+.cython.score-220 {background-color: #FFFF0b;}
+.cython.score-221 {background-color: #FFFF0b;}
+.cython.score-222 {background-color: #FFFF0a;}
+.cython.score-223 {background-color: #FFFF0a;}
+.cython.score-224 {background-color: #FFFF0a;}
+.cython.score-225 {background-color: #FFFF0a;}
+.cython.score-226 {background-color: #FFFF0a;}
+.cython.score-227 {background-color: #FFFF0a;}
+.cython.score-228 {background-color: #FFFF0a;}
+.cython.score-229 {background-color: #FFFF0a;}
+.cython.score-230 {background-color: #FFFF0a;}
+.cython.score-231 {background-color: #FFFF0a;}
+.cython.score-232 {background-color: #FFFF0a;}
+.cython.score-233 {background-color: #FFFF0a;}
+.cython.score-234 {background-color: #FFFF0a;}
+.cython.score-235 {background-color: #FFFF0a;}
+.cython.score-236 {background-color: #FFFF0a;}
+.cython.score-237 {background-color: #FFFF0a;}
+.cython.score-238 {background-color: #FFFF0a;}
+.cython.score-239 {background-color: #FFFF0a;}
+.cython.score-240 {background-color: #FFFF0a;}
+.cython.score-241 {background-color: #FFFF0a;}
+.cython.score-242 {background-color: #FFFF0a;}
+.cython.score-243 {background-color: #FFFF0a;}
+.cython.score-244 {background-color: #FFFF0a;}
+.cython.score-245 {background-color: #FFFF0a;}
+.cython.score-246 {background-color: #FFFF09;}
+.cython.score-247 {background-color: #FFFF09;}
+.cython.score-248 {background-color: #FFFF09;}
+.cython.score-249 {background-color: #FFFF09;}
+.cython.score-250 {background-color: #FFFF09;}
+.cython.score-251 {background-color: #FFFF09;}
+.cython.score-252 {background-color: #FFFF09;}
+.cython.score-253 {background-color: #FFFF09;}
+.cython.score-254 {background-color: #FFFF09;}
+.cython .hll { background-color: #ffffcc }
+.cython  { background: #f8f8f8; }
+.cython .c { color: #408080; font-style: italic } /* Comment */
+.cython .err { border: 1px solid #FF0000 } /* Error */
+.cython .k { color: #008000; font-weight: bold } /* Keyword */
+.cython .o { color: #666666 } /* Operator */
+.cython .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.cython .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.cython .cp { color: #BC7A00 } /* Comment.Preproc */
+.cython .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.cython .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.cython .cs { color: #408080; font-style: italic } /* Comment.Special */
+.cython .gd { color: #A00000 } /* Generic.Deleted */
+.cython .ge { font-style: italic } /* Generic.Emph */
+.cython .gr { color: #FF0000 } /* Generic.Error */
+.cython .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.cython .gi { color: #00A000 } /* Generic.Inserted */
+.cython .go { color: #888888 } /* Generic.Output */
+.cython .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.cython .gs { font-weight: bold } /* Generic.Strong */
+.cython .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.cython .gt { color: #0044DD } /* Generic.Traceback */
+.cython .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.cython .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.cython .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.cython .kp { color: #008000 } /* Keyword.Pseudo */
+.cython .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.cython .kt { color: #B00040 } /* Keyword.Type */
+.cython .m { color: #666666 } /* Literal.Number */
+.cython .s { color: #BA2121 } /* Literal.String */
+.cython .na { color: #7D9029 } /* Name.Attribute */
+.cython .nb { color: #008000 } /* Name.Builtin */
+.cython .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.cython .no { color: #880000 } /* Name.Constant */
+.cython .nd { color: #AA22FF } /* Name.Decorator */
+.cython .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.cython .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.cython .nf { color: #0000FF } /* Name.Function */
+.cython .nl { color: #A0A000 } /* Name.Label */
+.cython .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.cython .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.cython .nv { color: #19177C } /* Name.Variable */
+.cython .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.cython .w { color: #bbbbbb } /* Text.Whitespace */
+.cython .mb { color: #666666 } /* Literal.Number.Bin */
+.cython .mf { color: #666666 } /* Literal.Number.Float */
+.cython .mh { color: #666666 } /* Literal.Number.Hex */
+.cython .mi { color: #666666 } /* Literal.Number.Integer */
+.cython .mo { color: #666666 } /* Literal.Number.Oct */
+.cython .sb { color: #BA2121 } /* Literal.String.Backtick */
+.cython .sc { color: #BA2121 } /* Literal.String.Char */
+.cython .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.cython .s2 { color: #BA2121 } /* Literal.String.Double */
+.cython .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.cython .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.cython .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.cython .sx { color: #008000 } /* Literal.String.Other */
+.cython .sr { color: #BB6688 } /* Literal.String.Regex */
+.cython .s1 { color: #BA2121 } /* Literal.String.Single */
+.cython .ss { color: #19177C } /* Literal.String.Symbol */
+.cython .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.cython .vc { color: #19177C } /* Name.Variable.Class */
+.cython .vg { color: #19177C } /* Name.Variable.Global */
+.cython .vi { color: #19177C } /* Name.Variable.Instance */
+.cython .il { color: #666666 } /* Literal.Number.Integer.Long */
+    </style>
+    <script>
+    function toggleDiv(id) {
+        theDiv = id.nextElementSibling
+        if (theDiv.style.display != 'block') theDiv.style.display = 'block';
+        else theDiv.style.display = 'none';
+    }
+    </script>
+</head>
+<body class="cython">
+<p><span style="border-bottom: solid 1px grey;">Generated by Cython 0.23.4</span></p>
+<p>
+    <span style="background-color: #FFFF00">Yellow lines</span> hint at Python interaction.<br />
+    Click on a line that starts with a "<code>+</code>" to see the C code that Cython generated for it.
+</p>
+<div class="cython"><pre class="cython line score-0">&#xA0;<span class="">01</span>: </pre>
+<pre class="cython line score-14" onclick='toggleDiv(this)'>+<span class="">02</span>: <span class="k">def</span> <span class="nf">fib_cy3</span><span class="p">(</span><span class="n">n</span><span class="p">):</span></pre>
+<pre class='cython code score-14 '>/* Python wrapper */
+static PyObject *__pyx_pw_46_cython_magic_b2ecfce6889f340454f93e2264899042_1fib_cy3(PyObject *__pyx_self, PyObject *__pyx_v_n); /*proto*/
+static char __pyx_doc_46_cython_magic_b2ecfce6889f340454f93e2264899042_fib_cy3[] = "Compute the Fibonacci series up to n.";
+static PyMethodDef __pyx_mdef_46_cython_magic_b2ecfce6889f340454f93e2264899042_1fib_cy3 = {"fib_cy3", (PyCFunction)__pyx_pw_46_cython_magic_b2ecfce6889f340454f93e2264899042_1fib_cy3, METH_O, __pyx_doc_46_cython_magic_b2ecfce6889f340454f93e2264899042_fib_cy3};
+static PyObject *__pyx_pw_46_cython_magic_b2ecfce6889f340454f93e2264899042_1fib_cy3(PyObject *__pyx_self, PyObject *__pyx_v_n) {
+  PyObject *__pyx_r = 0;
+  <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("fib_cy3 (wrapper)", 0);
+  __pyx_r = __pyx_pf_46_cython_magic_b2ecfce6889f340454f93e2264899042_fib_cy3(__pyx_self, ((PyObject *)__pyx_v_n));
+
+  /* function exit code */
+  <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_46_cython_magic_b2ecfce6889f340454f93e2264899042_fib_cy3(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n) {
+  int __pyx_v_a;
+  int __pyx_v_b;
+  int __pyx_v_c_n;
+  PyObject *__pyx_r = NULL;
+  <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("fib_cy3", 0);
+/* … */
+  /* function exit code */
+  __pyx_L1_error:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("_cython_magic_b2ecfce6889f340454f93e2264899042.fib_cy3", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
+  <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
+  return __pyx_r;
+}
+/* … */
+  __pyx_tuple_ = <span class='py_c_api'>PyTuple_Pack</span>(4, __pyx_n_s_n, __pyx_n_s_a, __pyx_n_s_b, __pyx_n_s_c_n);<span class='error_goto'> if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple_);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple_);
+/* … */
+  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_46_cython_magic_b2ecfce6889f340454f93e2264899042_1fib_cy3, NULL, __pyx_n_s_cython_magic_b2ecfce6889f340454);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_fib_cy3, __pyx_t_1) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">03</span>:     <span class="sd">&quot;&quot;&quot;Compute the Fibonacci series up to n.&quot;&quot;&quot;</span></pre>
+<pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">04</span>:     <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">a</span> <span class="o">=</span> <span class="mf">0</span></pre>
+<pre class='cython code score-0 '>  __pyx_v_a = 0;
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">05</span>:     <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">b</span> <span class="o">=</span> <span class="mf">1</span></pre>
+<pre class='cython code score-0 '>  __pyx_v_b = 1;
+</pre><pre class="cython line score-8" onclick='toggleDiv(this)'>+<span class="">06</span>:     <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">c_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></pre>
+<pre class='cython code score-8 '>  __pyx_t_1 = <span class='py_c_api'>PyNumber_Int</span>(__pyx_v_n);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyInt_As_int</span>(__pyx_t_1);<span class='error_goto'> if (unlikely((__pyx_t_2 == (int)-1) &amp;&amp; PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_c_n = __pyx_t_2;
+</pre><pre class="cython line score-0">&#xA0;<span class="">07</span>: </pre>
+<pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">08</span>:     <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">c_n</span><span class="p">:</span></pre>
+<pre class='cython code score-0 '>  while (1) {
+    __pyx_t_3 = ((__pyx_v_b &lt; __pyx_v_c_n) != 0);
+    if (!__pyx_t_3) break;
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">09</span>:         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span></pre>
+<pre class='cython code score-0 '>    __pyx_t_2 = __pyx_v_b;
+    __pyx_t_4 = (__pyx_v_a + __pyx_v_b);
+    __pyx_v_a = __pyx_t_2;
+    __pyx_v_b = __pyx_t_4;
+  }
+</pre><pre class="cython line score-3" onclick='toggleDiv(this)'>+<span class="">10</span>:     <span class="k">return</span> <span class="n">b</span></pre>
+<pre class='cython code score-3 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyInt_From_int</span>(__pyx_v_b);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+</pre></div></body></html>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Baseline Python:&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> -n 1 -r 1  fib_py(100000000)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No C types:&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> -n 1 -r 1  fib_cy(100000000)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Some C types:&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> -n 1 -r 1  fib_cy2(100000000)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All C types:&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> -n 1 -r 1  fib_cy3(100000000)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Baseline Python:
+1 loop, best of 1: 5.32 µs per loop
+No C types:
+1 loop, best of 1: 2.77 µs per loop
+Some C types:
+1 loop, best of 1: 2.39 µs per loop
+All C types:
+1 loop, best of 1: 1.31 µs per loop
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So that a reasonable speedup (4-5x), just from adding c types.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h1><p>Can you convert this into something that runs faster in Cython? <a href="http://cython.readthedocs.io/en/latest/src/reference/language_basics.html">http://cython.readthedocs.io/en/latest/src/reference/language_basics.html</a> might help here. (I managed a ~50x speedup!  But maybe you can do even better?)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">primes_py</span><span class="p">(</span><span class="n">kmax</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">kmax</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="n">kmax</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">kmax</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>My answer is at the end of the notebook.  Don't peek until you're ready!</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Numpy-and-Cython">Numpy and Cython<a class="anchor-link" href="#Numpy-and-Cython">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Where Cython really shines is in <em>combination</em> with numpy.  You stick with numpy for general most things, but drop into highly optimized Cython for "hotspots" or places where it's much clearer.</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>One major gotcha: if you google "cython numpy", you'll probably come across pages like this: <a href="http://cython.readthedocs.io/en/latest/src/tutorial/numpy.html">http://cython.readthedocs.io/en/latest/src/tutorial/numpy.html</a>. It's worth reading to get a better understanding, but don't do that first!  It's an older, more complex way of working with numpy from Cython.  Instead, you want "typed memoryviews": <a href="http://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html">http://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html</a> - those are much easier to use quickly and simply.</li>
+</ul>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Let's-see-how-the-&quot;typed-memoryview&quot;-approach-works:">Let's see how the "typed memoryview" approach works:<a class="anchor-link" href="#Let's-see-how-the-&quot;typed-memoryview&quot;-approach-works:">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ap2b_py</span><span class="p">(</span><span class="n">a</span> <span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+<span class="k">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">ap2b_cy</span><span class="p">(</span><span class="n">a</span> <span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c"># they start out as regular numpy arrays, so they know their own length</span>
+    
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">i</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    
+    <span class="n">newarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:]</span> <span class="n">a_memview</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:]</span> <span class="n">b_memview</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="k">cdef</span> <span class="kt">double</span>[<span class="p">:]</span> <span class="n">new_memview</span> <span class="o">=</span> <span class="n">newarr</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">new_memview</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_memview</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">b_memview</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+    <span class="k">return</span> <span class="n">newarr</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10000000</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">timeit</span> ap2b_py(a, b)
+<span class="o">%</span><span class="k">timeit</span> ap2b_cy(a, b)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10 loops, best of 3: 63.2 ms per loop
+10 loops, best of 3: 34.8 ms per loop
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This ~ factor-of-2 speed improvement also comes at a factor-of-2 <em>memory</em> improvement, as there is no intermediate numpy array.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Some-more-complex-(but-perhaps-a-bit-more-practical)-examples-of-optimized-Cython">Some more complex (but perhaps a bit more practical) examples of optimized Cython<a class="anchor-link" href="#Some-more-complex-(but-perhaps-a-bit-more-practical)-examples-of-optimized-Cython">&#182;</a></h1><p>Note that some of these are <em>not</em> the memoryview form described above.  But they give you a flavor of the sort of performance improvements you might get</p>
+<ul>
+<li><a href="http://technicaldiscovery.blogspot.com/2011/06/speeding-up-python-numpy-cython-and.html">http://technicaldiscovery.blogspot.com/2011/06/speeding-up-python-numpy-cython-and.html</a> </li>
+<li><a href="http://nealhughes.net/cython1/">http://nealhughes.net/cython1/</a></li>
+<li><a href="http://www.perrygeo.com/parallelizing-numpy-array-loops-with-cython-and-mpi.html">http://www.perrygeo.com/parallelizing-numpy-array-loops-with-cython-and-mpi.html</a> (about  Parallelization with OpenMP, suitable for clusters)</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>One final tip for working with numpy and Cython.  Consider adding this to cython functions:</li>
+</ul>
+
+<pre><code>import cython
+
+@cython.cdivision(True) 
+@cython.wraparound(False)
+@cython.boundscheck(False)
+@cython.nonecheck(False)
+def my_cy_func(...):
+    ...</code></pre>
+<p>We won't dwell on the details of this - if you care you can read more at  <a href="http://cython.readthedocs.io/en/latest/src/reference/compilation.html#compiler-directives">http://cython.readthedocs.io/en/latest/src/reference/compilation.html#compiler-directives</a>. Just know that they will often speed things up a bit more, but at the price of a higher chance of crashing python.</p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Interfacing-with-C-code">Interfacing with C code<a class="anchor-link" href="#Interfacing-with-C-code">&#182;</a></h1><ul>
+<li>Cython also gives you the capability to call C directly.  The main trick is that you need to include something like this in the Cython file:
+<pre><code>cdef extern from "myheaders.h":
+  double c_function(int arg1, double arg2)</code></pre>
+you can then just use <code>c_function(a, b)</code> in a Cython function and it will work.</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The (mental) complexity scales roughly with the complexity of the C code.  E.g., functions with scalar arguments are easy, <code>double *</code> often works (even with numpy arrays), but <code>double **</code>: here there be dragons.</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>A good starting point is <a href="https://github.com/aphearin/cython_c_extension_example">https://github.com/aphearin/cython_c_extension_example</a></li>
+<li>For the gory details see <a href="http://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html">http://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html</a></li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Final-thoughts">Final thoughts<a class="anchor-link" href="#Final-thoughts">&#182;</a></h1><p>Cython is not the only way to speed numerical code up in python.</p>
+<ul>
+<li>Numba (<a href="http://numba.pydata.org/">http://numba.pydata.org/</a>) is an up-and-coming package that claims to do much of what Cython does, but without explicit compilation needed. </li>
+<li>HOPE (<a href="http://www.cosmology.ethz.ch/research/software-lab/HOPE.html">http://www.cosmology.ethz.ch/research/software-lab/HOPE.html</a>) is a similar package developed by astronomers (which can be a positive or negative, depending on your POV).  </li>
+<li>PyPy (<a href="http://pypy.org/">http://pypy.org/</a>) is a re-implementation of python that aims to also do many of the same things (although thus far has not been focused on numerical code).</li>
+<li>Pyston (<a href="https://github.com/dropbox/pyston">https://github.com/dropbox/pyston</a>) is yet another effort along similar lines, developed by Dropbox.</li>
+</ul>
+<p>And there are probably more.  But we only have so much time!</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Answer-to-Exercise">Answer to Exercise<a class="anchor-link" href="#Answer-to-Exercise">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="n">cython</span>
+
+<span class="k">def</span> <span class="nf">primes_cy</span><span class="p">(</span><span class="nb">int</span> <span class="n">kmax</span><span class="p">):</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">n</span><span class="p">,</span> <span class="nf">k</span><span class="p">,</span> <span class="nf">i</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="kt">p</span>[1000]
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">kmax</span> <span class="o">&gt;</span> <span class="mf">1000</span><span class="p">:</span>
+        <span class="n">kmax</span> <span class="o">=</span> <span class="mf">1000</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mf">0</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mf">2</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">kmax</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mf">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mf">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mf">1</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">1</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> primes_py(1000)
+<span class="o">%</span><span class="k">timeit</span> primes_cy(1000)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10 loops, best of 3: 82.6 ms per loop
+1000 loops, best of 3: 2.06 ms per loop
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div></section></section>
 </div>
 </div>
