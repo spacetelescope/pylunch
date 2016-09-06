@@ -14021,7 +14021,7 @@ you can then just use <code>c_function(a, b)</code> in a Cython function and it 
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="For-the-remaining-time...">For the remaining time...<a class="anchor-link" href="#For-the-remaining-time...">&#182;</a></h1><p>Explore!  If you have a C code of your own, perhaps you can try writing a Python interface to it.  If you don't, you could work through some of the earlier examples, or try a couple astronomy-centric exercises - you might start by writing it in Python and then adapting it to Cython...:</p>
 <ul>
-<li>Write a Cython function to simulate a ground-based image of a nearby galaxy, given a star catalog (in the real case this would be from e.g. HST or JWST, but you could just make a random list, here).  It's probably easiest to assume Gaussian seeing (of ~1"), but you can always try </li>
+<li>Write a Cython function to simulate a ground-based image of a nearby galaxy, given a star catalog (in the real case this would be from e.g. HST or JWST, but you could just make a random list, here).  It's probably easiest to assume Gaussian seeing, but you can always try whatever you favorite seeing kernel is.  (There's a solution to this at the very end taken from my own science notebooks.)</li>
 <li>Write a Cython function that convolves an image (a 2D numpy array) with a small kernel (another 2D numpy array, say 5x5).  (You'd probably want to use <a href="http://docs.astropy.org/en/stable/convolution/">astropy.convolution</a> for this in a real science situation... But that is, itself implemented in Cython, so you could look at astropy's code for ideas) </li>
 </ul>
 
