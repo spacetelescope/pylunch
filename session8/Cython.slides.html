@@ -12023,8 +12023,14 @@ a.anchor-link {
 <li>Look at the file <code>hello_world.pyx</code> in the spacetelescope/pylunch repo. </li>
 <li>Open up a terminal and go to the repo and do <code>cython hello_world.pyx</code>.  It should create a <code>hello_world.c</code> file.</li>
 <li>Now compile that file.  This can be tricky to know the right flags.  For me, this worked:
-<pre><code>clang -bundle -undefined dynamic_lookup -L/Users/erik/miniconda3/envs/anaconda/lib -arch x86_64 build/temp.macosx-10.6-x86_64-3.5/astropy/_compiler.o -L/Users/erik/miniconda3/envs/anaconda/lib hello_world.c hello_world.so</code></pre>
+<pre><code>clang -bundle -undefined dynamic_lookup -L/Users/erik/miniconda3/envs/anaconda/lib -arch x86_64 -I/Users/erik/miniconda3/envs/anaconda/include/python3.5m hello_world.c -o hello_world.so</code></pre>
 try that but with "anaconda" replaced by your current conda environment.  If you have trouble, check out <a href="http://cython.readthedocs.io/en/latest/src/reference/compilation.html">http://cython.readthedocs.io/en/latest/src/reference/compilation.html</a> .  If you still have trouble, try the method in <a href="http://cython.readthedocs.io/en/latest/src/tutorial/cython_tutorial.html">http://cython.readthedocs.io/en/latest/src/tutorial/cython_tutorial.html</a>, or just wait for a bit.</li>
+<li>Once you've got it compiled, you should have a <code>hello_world.so</code> file, which acts like a Python package.  So start up python and do:
+<pre><code>&gt;&gt;&gt; import hello_world
+&gt;&gt;&gt; hello_world.do_hello()
+hello world from python
+hello world from c</code></pre>
+</li>
 </ul>
 
 </div>
