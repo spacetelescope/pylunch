@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>Object Oriented Intro slides</title>
+<title>Conda and Workflows slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11830,7 +11830,26 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="What-is-Object-Oriented-Programming?">What is Object-Oriented Programming?<a class="anchor-link" href="#What-is-Object-Oriented-Programming?">&#182;</a></h1>
+<h1 id="Conda-Overview/Refresher">Conda Overview/Refresher<a class="anchor-link" href="#Conda-Overview/Refresher">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="logo-anaconda.svg" style="background:none; border:none; box-shadow:none;" width="75%" height="75%"></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Why-is-Conda-useful?">Why is Conda useful?<a class="anchor-link" href="#Why-is-Conda-useful?">&#182;</a></h1>
 </div>
 </div>
 </div><div class="fragment">
@@ -11839,7 +11858,9 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Programming oriented around objects</p>
+<ul>
+<li>Easy to get running consistently on all major platforms</li>
+</ul>
 
 </div>
 </div>
@@ -11849,7 +11870,9 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>"object"</strong> : A structure with both data <em>and</em> functions</p>
+<ul>
+<li>Goes in your user directory - <em>much</em> easier to fix if something's broken</li>
+</ul>
 
 </div>
 </div>
@@ -11859,7 +11882,73 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Similar to a C or IDL <code>struct</code>, but with functions "bound" to them.</p>
+<ul>
+<li>Open source and flexible, so "astroconda" can exist at all</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Provides "environments"</li>
+</ul>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="How-do-environments-help?">How do environments help?<a class="anchor-link" href="#How-do-environments-help?">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>They let you do things like:</p>
+
+<pre><code>conda create -n my-old-science-project astropy=1.0  python=2.7 matplotlib=1.4</code></pre>
+
+<pre><code>conda create -n my-newer-science-project astropy=1.3  python=3.5 matplotlib=2.0</code></pre>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Which you then can use at any time by doing:</p>
+
+<pre><code>source activate my-old-science project
+pip install some-other-specific-science-code
+python ...</code></pre>
+<p>or</p>
+
+<pre><code>source activate my-new-science project
+pip install some-other-specific-science-code
+jupyter notebook ...</code></pre>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But they only take as much space as they need to (implicitly, they're sharing numpy and scipy), and you can remove and start over at any time if you screw something up.</p>
 
 </div>
 </div>
@@ -11869,89 +11958,210 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="How-do-you-use-an-object?">How do you use an object?<a class="anchor-link" href="#How-do-you-use-an-object?">&#182;</a></h1>
+<p><img src="Conda Drawing.svg" style="background:none; border:none; box-shadow:none;" width="75%" height="75%"></p>
+
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>To install Conda: <a href="https://www.continuum.io/downloads">https://www.continuum.io/downloads</a></li>
+<li>For astroconda: <a href="https://astroconda.readthedocs.io">https://astroconda.readthedocs.io</a></li>
+<li>For astropy channel, just do <code>conda install -c astropy &lt;whatever&gt;</code></li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Python-Workflows">Python Workflows<a class="anchor-link" href="#Python-Workflows">&#182;</a></h1><ul>
+<li>Scripts</li>
+<li>Python interpreter</li>
+<li>IPython interpreter</li>
+<li>Jupyter notebook</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Python-scripts-(&quot;.py&quot;-files)">Python scripts (".py" files)<a class="anchor-link" href="#Python-scripts-(&quot;.py&quot;-files)">&#182;</a></h1><p>Python scripts are one of the simplest ways to run python code - whatever's in the file just gets executed by the python interpreter as-is so it's very straightforward to see what's going on.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can write scripts that run just like a normal program from the terminal. 
+Open your favorite text editor and create a hello.py file containing the following line:</p>
+
+<pre><code>print('Hello World!')</code></pre>
+<p>Now from the bash terminal prompt run:</p>
+
+<pre><code>python hello.py</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When you run the file this way you tell it to use the current active Python to run the file.</p>
+<p>To make this script run like a command, add the following to the beginning of the file:</p>
+
+<pre><code>#!/usr/bin/env python</code></pre>
+<p>Then, make the script executable using the command:</p>
+
+<pre><code>$ chmod u+x hello.py</code></pre>
+<p>Now you will be able to run the script as:</p>
+
+<pre><code>$ ./hello.py</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If a script needs to be run by a specific version of python, and not the one normally found when you type <code>python</code> on the command line, you can specify the full path to that python executable:</p>
+
+<pre><code>#!/Users/myusername/anaconda/envs/base-py2/bin/python</code></pre>
+<p>To learn more about this Unix magic, lookup <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Python-and-IPython-interpreters">Python and IPython interpreters<a class="anchor-link" href="#Python-and-IPython-interpreters">&#182;</a></h1><p>A more convenient way to work with Python is through a command line interpreter.  This allows quick interactive work with Python, often useful for quick analysis or one-off activities.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The basic Python command line interpreter can be started by just typing:</p>
+
+<pre><code>python</code></pre>
+<p>This will create a prompt where you can issue python commands just like they were written in a script.  For example, a simple print statement:</p>
+
+<pre><code>&gt;&gt;&gt; print('Hello World!')
+Hello World!</code></pre>
+<p>To quit the interpreter, just run <code>exit()</code> (or ctrl-D):</p>
+
+<pre><code>&gt;&gt;&gt; exit()</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This interpreter is pretty basic, no bells and whistles. A much more user friendly version is the interactive python interpreter or:</p>
+
+<pre><code>ipython</code></pre>
+<p>This is the interpreter I use for most of my work. Here, as above, you can do a simple print statement:</p>
+
+<pre><code>In [1]: print('Hello World!')
+Hello World!</code></pre>
+<p>But you also have tab completion:</p>
+<p>(In the below, by +Tab I mean press the tab key.)</p>
+
+<pre><code>&gt;&gt;&gt; pri+Tab
+&gt;&gt;&gt; print</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>IPython includes more fancy features to make working easier.  For example, p + up arrow will go through your history and only show you commands starting with p - try it and see!</p>
+<p>Let’s set an integer variable, and then examine the documentation for an integer. Putting a <code>?</code> after something in IPython and hitting enter will give you a info about that variable.</p>
+
+<pre><code>In [1]: a = 5
+In [2]: a?</code></pre>
+<p>Doing<code>&lt;something&gt;.+tab</code> will list all of the “methods” of this objects or a bunch of thing Python inherently know about your variable (if you don't know what "methods" are, you will soon!)</p>
+
+<pre><code>In [1]: a = 5
+In [2]: a.+tab</code></pre>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Jupyter-notebooks">Jupyter notebooks<a class="anchor-link" href="#Jupyter-notebooks">&#182;</a></h1><p>A final way of using python is through the Jupyter Notebooks (used for this right here!).  Notebooks are convenient for science workflows because they allow full access to Python (or other programming languages) while storing a record of everything you've done, along with notes you might want to leave yourself, as well as multimedia content like plots or animations.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In your terminal fire up the notebook server:</p>
+
+<pre><code>jupyter notebook</code></pre>
+<p>This will pop up a web page. In the upper right corner click on the "New" tab and select the "Python3" option, which will start a notebook just like this one. Note that to actually make code <em>run</em> in a notebook, you have to use shift-enter (or ctrl-enter).</p>
+<p>So we'll try out the exercises above in the notebook. In the notebook it's easy define functions, as shown below.  (Be sure to hit shift-enter on that cell before trying to use it in the cell below!)</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../README.md&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;James&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello </span><span class="si">{}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span><span class="o">.</span><span class="n">name</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;../README.md&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fobj</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;PyLunch Nova &lt;sup&gt;*&lt;/sup&gt;\n&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fobj</span><span class="o">.</span><span class="n">tell</span><span class="p">())</span>
-<span class="n">fobj</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fobj</span><span class="o">.</span><span class="n">tell</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hello</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11964,8 +12174,7 @@ a.anchor-link {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>26
-52
+<pre>Hello James!
 </pre>
 </div>
 </div>
@@ -11973,405 +12182,57 @@ a.anchor-link {
 </div>
 </div>
 
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Why-do-we-care-about-objects?">Why do we care about objects?<a class="anchor-link" href="#Why-do-we-care-about-objects?">&#182;</a></h1>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Everything</strong> in Python is an object. (Even the classes themselves! Mind-bending...)</p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Objects hide details you don't care about (E.g., where am I in the file), and provide a unified view of what you do.</p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Objects make it easier for you to extend someone else's work without (E.g., domain-specific coordinates in <code>astropy</code>, your own point spread function in <code>photutils</code>).</p>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Some-More-Terminology">Some More Terminology<a class="anchor-link" href="#Some-More-Terminology">&#182;</a></h1><ul>
-<li><strong>"method"</strong>: A function that's attached ("<strong>bound</strong>") to an object.</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"class"</strong>: The "template" for an object (defines the methods and sometimes default data).  By convention uses a CamelCase name like <code>MyClassName</code>.</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"instance"</strong>: One particular object of a class (E.g. "that object is an instance of class File")</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"instantiate/initialize"</strong>: Creating a new instance of a class</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong><code>__init__</code></strong>: A special name Python uses for the method called when a new object is instantiated</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>"subclass"</strong>: A class that has everything some other class has, plus more (for <strong>"inheritance"</strong>)</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Some-Examples-(For-you-to-try!)">Some Examples (For you to try!)<a class="anchor-link" href="#Some-Examples-(For-you-to-try!)">&#182;</a></h1><p>Go to <a href="https://github.com/spacetelescope/pylunch">https://github.com/spacetelescope/pylunch</a> and clone it (if you know git).  Then just find the <code>Object Oriented Intro.ipynb</code> file.</p>
-<h2 id="Or">Or<a class="anchor-link" href="#Or">&#182;</a></h2><p>Go to the same page and click on: <code>session2</code> -&gt; <code>Object Oriented Intro.ipynb</code>.  Then right click on the "Raw" button (upper right), and "save link as"/"download link" (or whatever is similar for your browser).  Or just use <a href="https://raw.githubusercontent.com/spacetelescope/pylunch/master/session2/Object%20Oriented%20Intro.ipynb">this link</a> (its the same thing).</p>
-<h2 id="Then">Then<a class="anchor-link" href="#Then">&#182;</a></h2><p>Once you've got it locally, open a terminal, <code>cd</code> into that directory, and run the command <code>jupyter notebook</code>.</p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Point/Circle-Example">Point/Circle Example<a class="anchor-link" href="#Point/Circle-Example">&#182;</a></h2><p>A point in 2D space has two coordinates.  A circle can be thought of as a point with a radius.  This is a common use of inheritance: we'll need to define a <code>Point</code> class to store the <code>x</code> and <code>y</code> positions, and a <code>Circle</code> class (which is a subclass of <code>Point</code>), which also has a <code>radius</code>.</p>
-<p>Along the way we'll also implement methods to draw the objects (using the <code>matplotlib</code> plotting package).  Don't worry about the details of anything that starts with <code>plt</code>, just know that it's calling <code>matploltlib</code> to actually make the plots.</p>
-
-</div>
-</div>
-</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># This cell has some stuff needed to make the &quot;draw&quot; methods work.  It&#39;s not </span>
-<span class="c1"># important to understand them for now, but you do need to run them to  get</span>
-<span class="c1"># things to work in the notebook</span>
-
-<span class="c1"># This makes notebooks render plots inside the notebook</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="c1"># And these are imports from the &quot;matplotlib&quot; plotting package (more on that in a future session)</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hello</span><span class="p">(</span><span class="s1">&#39;Altez&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></section><section>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello Altez!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="c1"># this is the method that gets called when you create a new Point</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-        
-    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">])</span>
-
-    
-<span class="c1"># if you&#39;re on python 2.x, the top line should be:</span>
-<span class="c1">#class Point(object):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>  <span class="c1"># You can just call draw, and not worry at all about *how* the drawing happens</span>
-</pre></div>
+<div class="output_wrapper">
+<div class="output">
 
-</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello !
+</pre>
 </div>
 </div>
 
-</div></div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Circle</span><span class="p">(</span><span class="n">Point</span><span class="p">):</span>  <span class="c1"># This means &quot;define a class Circle that is a subclass of Point&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-        <span class="c1"># can also be this (works in py 2.x):</span>
-        <span class="c1">#Point.__init__(self, x, y)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
-    
-    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># this method &quot;overrides&quot; the `draw` method of Point</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Circle</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-        <span class="c1"># can also be this (works in py 2.x):</span>
-        <span class="c1">#Point.draw(self)</span>
-        <span class="c1"># note for people not familiar with matplotlib: alpha keyword below sets transparency</span>
-        <span class="n">circle_patch</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle_patch</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">compute_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">pi</span>
-        <span class="k">return</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pointishes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">pointishes</span><span class="p">:</span>
-    <span class="n">obj</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> <span class="c1"># again, all I need to know is that they &quot;can be drawn&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pointishes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">compute_area</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&quot;Astronomer&quot;-Example">"Astronomer" Example<a class="anchor-link" href="#&quot;Astronomer&quot;-Example">&#182;</a></h2><p>This is a more complex class heirarchy, which includes demonstrating multiple inheritance by way of the "diamond" pattern illustrated below.  Also a fairly cynical view of how our science gets done.</p>
-<p>&lt;img src="AstronomerClassHeirarchy.svg" width=40%&gt;</p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Astronomer</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span> <span class="o">=</span> <span class="p">[]</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;What, you think astronomers are all alike? Pick something more specific.&quot;</span><span class="p">)</span>
-        
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">cv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Observer</span><span class="p">(</span><span class="n">Astronomer</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">favorite_targets</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="o">=</span> <span class="n">favorite_targets</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">target</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">()</span>
-        
-        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Sucessfully observed &#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Failed to observe &#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span>
-    
-    <span class="n">success_rate</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>  <span class="c1"># TAC+weather if you&#39;re ground based, maybe?</span>
-    <span class="k">def</span> <span class="nf">observe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        
-        <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">favorite_targets</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>        
-        <span class="n">success</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_rate</span>
-        
-        <span class="k">return</span> <span class="n">target</span><span class="p">,</span> <span class="n">success</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Theorist</span><span class="p">(</span><span class="n">Astronomer</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">theory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_theory</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Foundational work on theory of &#39;</span> <span class="o">+</span> <span class="n">theory</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">make_theory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        <span class="c1"># Eh, we just make it all up anyway</span>
-        <span class="n">theory</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">97</span><span class="o">+</span><span class="mi">25</span><span class="p">))</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
-            <span class="n">theory</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">97</span><span class="o">+</span><span class="mi">25</span><span class="p">))</span>
-            
-        <span class="k">return</span> <span class="n">theory</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Hybrid</span><span class="p">(</span><span class="n">Observer</span><span class="p">,</span> <span class="n">Theorist</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fraction_theorist</span><span class="p">,</span> <span class="n">favorite_targets</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">favorite_targets</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fraction_theorist</span> <span class="o">=</span> <span class="n">fraction_theorist</span>
-        
-    <span class="k">def</span> <span class="nf">do_science</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fraction_theorist</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_theory</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">target</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Used </span><span class="si">{}</span><span class="s1"> to prove theory </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_science_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Used </span><span class="si">{}</span><span class="s1"> to falsify theory </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_theory</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">iva_momcheva</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">([</span><span class="s1">&#39;AEGIS&#39;</span><span class="p">,</span> <span class="s1">&#39;COSMOS&#39;</span><span class="p">,</span> <span class="s1">&#39;GOODS&#39;</span><span class="p">,</span> <span class="s1">&#39;UDS&#39;</span><span class="p">,</span> <span class="s1">&#39;Clg J0218.3-0510&#39;</span><span class="p">,</span> <span class="s1">&#39;assorted fancy lens clusters&#39;</span><span class="p">])</span>
-<span class="n">erik_tollerud</span> <span class="o">=</span> <span class="n">Hybrid</span><span class="p">(</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;an M31 satellite&#39;</span><span class="p">,</span> <span class="s1">&#39;a Milky Way satellite&#39;</span><span class="p">,</span> <span class="s1">&#39;an isolated LG Dwarf&#39;</span><span class="p">,</span> <span class="s1">&#39;a Local Volume Dwarf&#39;</span><span class="p">])</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">iva_momcheva</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-    <span class="n">erik_tollerud</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-    
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Erik&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">erik_tollerud</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Iva&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">iva_momcheva</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fritz_zwicky</span> <span class="o">=</span> <span class="n">Theorist</span><span class="p">()</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">):</span>
-    <span class="n">fritz_zwicky</span><span class="o">.</span><span class="n">do_science</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zwicky&#39;s CV:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fritz_zwicky</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span>
-</pre></div>
-
-</div>
 </div>
 </div>
 
@@ -12381,15 +12242,16 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Other-resources/examples">Other resources/examples<a class="anchor-link" href="#Other-resources/examples">&#182;</a></h1><ul>
-<li>Some "business"-oriented example of object-oriented programming and interitance in Python:<ul>
-<li><a href="http://www.tutorialspoint.com/python/python_classes_objects.htm">http://www.tutorialspoint.com/python/python_classes_objects.htm</a></li>
-<li><a href="https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/">https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/</a></li>
-</ul>
-</li>
-<li>If you're into role-playing games: <a href="http://inventwithpython.com/blog/2014/12/02/why-is-object-oriented-programming-useful-with-an-role-playing-game-example/">http://inventwithpython.com/blog/2014/12/02/why-is-object-oriented-programming-useful-with-an-role-playing-game-example/</a></li>
-<li>The class heirarchy of <code>astropy.coordinates</code>: <a href="http://docs.astropy.org/en/stable/coordinates/index.html#class-inheritance-diagram">http://docs.astropy.org/en/stable/coordinates/index.html#class-inheritance-diagram</a>, and the documentation for how to make your own custom frames: <a href="http://docs.astropy.org/en/stable/coordinates/frames.html#defining-a-new-frame">http://docs.astropy.org/en/stable/coordinates/frames.html#defining-a-new-frame</a></li>
-</ul>
+<h1 id="Combining-Jupyter-with-conda">Combining Jupyter with conda<a class="anchor-link" href="#Combining-Jupyter-with-conda">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Conda has one more neat trick up its sleeve: you can choose <em>in a notebook</em> which conda environment you want to use.</p>
 
 </div>
 </div>
@@ -12399,15 +12261,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Now-some-ideas-to-play-around-with:">Now some ideas to play around with:<a class="anchor-link" href="#Now-some-ideas-to-play-around-with:">&#182;</a></h1><ul>
-<li>Extend the Point/Circle heirarchy to include Ellipse, or maybe Square (requires some knowledge of matplotlib)</li>
-<li>Extend the Astronomer heirarchy.  Maybe specific kinds of observers?</li>
-<li>Make your own "toy" class heirarchy from scratch.  Make sure to actually instantitate some objects and test that they work</li>
-<li>Chat with someone about or hack on a class heirarchy for some of your own data reduction/analysis code.</li>
-<li>Try more complicated multiple inheritance heirarchies, and try to infer how <code>super()</code> works (you'll probably have some surprises!).</li>
-<li>If you think you already understand classes and want to blow your mind: Experiment with metaclasses (E.g., <a href="https://docs.python.org/3/reference/datamodel.html#customizing-class-creation">https://docs.python.org/3/reference/datamodel.html#customizing-class-creation</a>)</li>
-</ul>
-
+<h1 id="What's-your-favorite-workflow?--Discuss!">What's your favorite workflow?  Discuss!<a class="anchor-link" href="#What's-your-favorite-workflow?--Discuss!">&#182;</a></h1>
 </div>
 </div>
 </div></section></section>
