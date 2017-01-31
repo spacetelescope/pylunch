@@ -47,7 +47,7 @@ def make_index(toindex, fntowrite='index.html'):
             f.write('\n')
 
 
-def update_pages_branch(remote_to_push_to, pages_branch, dirs):
+def update_pages_branch(remote_to_push_to, pages_branch, dirs, push_if_no_update):
     import os
 
     import git  # GitPython
@@ -76,7 +76,7 @@ def update_pages_branch(remote_to_push_to, pages_branch, dirs):
 
     repo.index.add(toadd)
     anything_added = repo.git.diff('--cached', '--abbrev=40', '--raw') != ''
-    if anything_added:
+    if anything_added or push_if_no_update:
         repo.index.commit('Automatic commit from update_pages.py')
 
         if remote_to_push_to:
@@ -105,7 +105,7 @@ def update_pages_branch(remote_to_push_to, pages_branch, dirs):
     repo.head.reset(index=True, working_tree=False)
 
 
-def main(remote, pages_branch, pattern):
+def main(remote, pages_branch, pattern, push_if_no_update):
     import re
     import os
 
@@ -119,7 +119,7 @@ def main(remote, pages_branch, pattern):
     os.chdir(basedir)
 
     make_index(generated_html)
-    update_pages_branch(remote, pages_branch, dirs_to_copy)
+    update_pages_branch(remote, pages_branch, dirs_to_copy, push_if_no_update)
 
 if __name__ == '__main__':
     import argparse
@@ -132,6 +132,9 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--pattern', default=r'\d*-',
                         help='A regular expression to identify the directories'
                              ' to be copied')
+    parser.add_argument('-n', '--push-if-no-update', action='store_true',
+                        help='The name set to push to the remote even if no '
+                        'changes were detected.')
     ns = parser.parse_args()
 
-    main(ns.remote, ns.pages_branch, ns.pattern)
+    main(ns.remote, ns.pages_branch, ns.pattern, ns.push_if_no_update)
