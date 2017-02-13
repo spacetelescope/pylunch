@@ -129,7 +129,7 @@ if __name__ == '__main__':
                         'the remote to push to.  Defaults to not pushing')
     parser.add_argument('-b', '--pages-branch', default='gh-pages', help='The '
                         'name of the github pages branch')
-    parser.add_argument('-p', '--pattern', default=r'\d*-',
+    parser.add_argument('-p', '--pattern', default=r'^(?!scripts)',
                         help='A regular expression to identify the directories'
                              ' to be copied')
     parser.add_argument('-n', '--push-if-no-update', action='store_true',
