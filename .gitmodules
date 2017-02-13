@@ -1,0 +1,3 @@
+[submodule "jvdp_book/PythonDataScienceHandbook"]
+	path = jvdp_book/PythonDataScienceHandbook
+	url = https://github.com/jakevdp/PythonDataScienceHandbook
