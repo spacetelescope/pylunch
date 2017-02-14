@@ -9,9 +9,11 @@ Suggesting topics
 -----------------
 If you'd like to suggest a topic, please use the Github issue tracker.  Just hit the "issues" tab at the top and then "new issue".
 
-Possibly-useful links
----------------------
+Possibly-useful links/resources
+-------------------------------
 
+STScI's "#python" Slack channel
+STScI [PyLunch mailing list](https://maillist.stsci.edu/scripts/wa.exe?A0=pylunch)
 [Scientific Python Cheat Sheet](https://ipgp.github.io/scientific_python_cheat_sheet/)
 
 
