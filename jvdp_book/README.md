@@ -8,7 +8,7 @@ If you have not done so already, you will need to have [anaconda]() installed.  
 
 1. Check if git is installed by typing ``git`` into the command line.  If you get "command not found" or similar, you need to do the next step.
 2. If not, do ``conda install git``
-3. Once git is installed, go to some place where you'll find it later (perhaps your home directory), and do ``git clone ``.  This will create a directory called "pylunch".
+3. Once git is installed, go to some place where you'll find it later (perhaps your home directory), and do ``git clone https://github.com/spacetelescope/pylunch.git``.  This will create a directory called "pylunch".
 4. ``cd pylunch``
 5. ``git submodule init``
 6. ``git submodule update``
